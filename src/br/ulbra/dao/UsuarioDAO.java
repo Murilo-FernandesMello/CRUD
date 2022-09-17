@@ -159,8 +159,8 @@ public class UsuarioDAO {
         ResultSet rs = null;
         ArrayList<Usuario> usuarios = new ArrayList<>();
         try {
-            stmt = (PreparedStatement) con.prepareStatement("SELECT * FROM tbUsuario WHERE nomeUsu LIKE");
-            stmt.setString(1, "%" + nome + "%");
+            stmt = con.prepareStatement("SELECT * FROM tbUsuario WHERE nomeUsu LIKE ?");
+            stmt.setString(1, "%"+nome+"%");
             rs = stmt.executeQuery();
             while (rs.next()) {
                 Usuario usuario = new Usuario();
@@ -168,7 +168,7 @@ public class UsuarioDAO {
                 usuario.setNomeUsu(rs.getString("nomeUsu"));
                 usuario.setEmailUsu(rs.getString("emailUsu"));
                 usuario.setTelUsu(rs.getString("telUsu"));
-                usuario.setSexoUsu(rs.getInt("sexoU"));
+                usuario.setSexoUsu(rs.getInt("sexoUsu"));
                 usuario.setSenhaUsu(rs.getString("SenhaUsu"));
                 usuarios.add(usuario);
             }
@@ -180,4 +180,6 @@ public class UsuarioDAO {
         }
         return usuarios;
     }
+    
+  
 }

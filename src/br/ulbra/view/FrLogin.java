@@ -1,4 +1,4 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -6,6 +6,8 @@
 package br.ulbra.view;
 
 import br.ulbra.dao.UsuarioDAO;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -20,11 +22,18 @@ public class FrLogin extends javax.swing.JFrame {
 
     /**
      * Creates new form FrLogin2
+     * @throws java.sql.SQLException
      */
-    public FrLogin() {
-        initComponents();
+    public FrLogin() throws SQLException {
+
         this.setLocationRelativeTo(null); //coloca o formulário no centro da tela 
 
+        FrLogin f = new FrLogin();
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        int xSize = ((int) tk.getScreenSize().getWidth());
+        int ySize = ((int) tk.getScreenSize().getHeight());
+        f.setSize(xSize, ySize);
+        f.show();
     }
 
     /**
@@ -195,7 +204,7 @@ public class FrLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_BtLoginActionPerformed
 
     private void EdSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdSenhaActionPerformed
-        
+
     }//GEN-LAST:event_EdSenhaActionPerformed
 
     private void BtSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtSairActionPerformed
@@ -204,7 +213,7 @@ public class FrLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_BtSairActionPerformed
 
     private void EdSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EdSenhaKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){ //entrar por enter no form
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) { //entrar por enter no form
             new FrMenu().setVisible(true);
             this.dispose();
         }
@@ -241,7 +250,11 @@ public class FrLogin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrLogin().setVisible(true);
+                try {
+                    new FrLogin().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(FrLogin.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

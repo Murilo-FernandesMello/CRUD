@@ -7,6 +7,8 @@ package br.ulbra.view;
 
 import br.ulbra.entity.Usuario;
 import br.ulbra.dao.UsuarioDAO;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,6 +30,14 @@ public class FrCadastro extends javax.swing.JFrame {
         ControlarBtn(1);
         EdIdCad.setEnabled(false);
         readJTable();
+        FullScreen();
+
+    }
+
+    public void FullScreen() throws SQLException {
+        FrCadastro fs = new FrCadastro();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        fs.setSize(screenSize.width, screenSize.height);
 
     }
 
@@ -432,9 +442,11 @@ public class FrCadastro extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "As senhas estão diferentes!");
             }
+            FullScreen();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "ERRO: " + ex.getMessage());
         }
+
     }//GEN-LAST:event_BtSalvarActionPerformed
 
     private void BtExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtExcluirActionPerformed
@@ -451,6 +463,7 @@ public class FrCadastro extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Exclusão cancelada!");
             }
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro:" + ex.getMessage());
         }
@@ -481,6 +494,7 @@ public class FrCadastro extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Você inseriu senhas diferentes!");
             }
+
         } catch (SQLException ex) {
             Logger.getLogger(FrCadastro.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -538,7 +552,11 @@ public class FrCadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_tbUsuarioMouseClicked
 
     private void BtPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesquisarActionPerformed
-        // TODO add your handling code here:
+        try {
+            readJTableForDesc(EdPesquisar.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(FrCadastro.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_BtPesquisarActionPerformed
 
     private void EdPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdPesquisarActionPerformed
@@ -634,17 +652,17 @@ public class FrCadastro extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-        try {
-            new FrCadastro().setVisible(true);
+                try {
+                    new FrCadastro().setVisible(true);
 
-        } catch (SQLException ex) {
-            Logger.getLogger(FrCadastro.class
-                    .getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(FrCadastro.class
+                            .getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
+        );
     }
-}
-);
-}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtAlterar;
     private javax.swing.JButton BtExcluir;

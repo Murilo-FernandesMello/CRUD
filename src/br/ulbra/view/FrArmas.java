@@ -159,7 +159,7 @@ public class FrArmas extends javax.swing.JFrame {
             }
         });
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -463,7 +463,11 @@ public class FrArmas extends javax.swing.JFrame {
     }//GEN-LAST:event_BtPesquisarActionPerformed
 
     private void BtPesquisarArmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesquisarArmActionPerformed
-        // TODO add your handling code here:
+         try {
+            readJTableForDesc(EdPesquisar.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(FrArmas.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_BtPesquisarArmActionPerformed
 
     private void BtNovoArmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtNovoArmActionPerformed
