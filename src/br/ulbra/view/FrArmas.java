@@ -7,6 +7,7 @@ package br.ulbra.view;
 
 import br.ulbra.dao.ArmaDAO;
 import br.ulbra.entity.Armas;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -78,12 +79,12 @@ public class FrArmas extends javax.swing.JFrame {
         }
     }
 
-    public void readJTableForDesc(String nome) throws SQLException {
+    public void readJTableForDesc(String tipo, String nome) throws SQLException {
         DefaultTableModel modelo
                 = (DefaultTableModel) tbArmas.getModel();
         modelo.setNumRows(0);
-        ArmaDAO ardao = new ArmaDAO();
-        for (Armas a : ardao.readForDesc(nome)) {
+        ArmaDAO adao = new ArmaDAO();
+        for (Armas a : adao.readForDesc(tipo,nome)) {
             modelo.addRow(new Object[]{
                 a.getIdArm(),
                 a.getNomeArm(),
@@ -109,7 +110,7 @@ public class FrArmas extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        EdPesquisar1 = new javax.swing.JTextField();
+        EdPesquisarArm = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         BtPesquisarArm = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -134,6 +135,7 @@ public class FrArmas extends javax.swing.JFrame {
         BtSalvarArma = new javax.swing.JButton();
         BtExcluirArma = new javax.swing.JButton();
         BtAlterarArma = new javax.swing.JButton();
+        cbTipo = new javax.swing.JComboBox<>();
 
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -175,14 +177,19 @@ public class FrArmas extends javax.swing.JFrame {
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ulbra/img/bala.png"))); // NOI18N
         jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(114, 12, -1, -1));
 
-        EdPesquisar1.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
-        EdPesquisar1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 51), 1, true));
-        EdPesquisar1.addActionListener(new java.awt.event.ActionListener() {
+        EdPesquisarArm.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        EdPesquisarArm.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 51), 1, true));
+        EdPesquisarArm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EdPesquisar1ActionPerformed(evt);
+                EdPesquisarArmActionPerformed(evt);
             }
         });
-        jPanel1.add(EdPesquisar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 56, 372, 19));
+        EdPesquisarArm.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EdPesquisarArmKeyPressed(evt);
+            }
+        });
+        jPanel1.add(EdPesquisarArm, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 140, 19));
 
         jLabel11.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -198,7 +205,7 @@ public class FrArmas extends javax.swing.JFrame {
                 BtPesquisarArmActionPerformed(evt);
             }
         });
-        jPanel1.add(BtPesquisarArm, new org.netbeans.lib.awtextra.AbsoluteConstraints(451, 56, 28, -1));
+        jPanel1.add(BtPesquisarArm, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 60, 28, -1));
 
         tbArmas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -434,6 +441,9 @@ public class FrArmas extends javax.swing.JFrame {
 
         jPanel1.add(PnArm, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 217, -1, -1));
 
+        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "Tipo", "Calibre" }));
+        jPanel1.add(cbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, 150, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -454,17 +464,25 @@ public class FrArmas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_EdPesquisarActionPerformed
 
-    private void EdPesquisar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdPesquisar1ActionPerformed
+    private void EdPesquisarArmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdPesquisarArmActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_EdPesquisar1ActionPerformed
+    }//GEN-LAST:event_EdPesquisarArmActionPerformed
 
     private void BtPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesquisarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BtPesquisarActionPerformed
 
     private void BtPesquisarArmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesquisarArmActionPerformed
-         try {
-            readJTableForDesc(EdPesquisar.getText());
+        try {
+            String tipo = null;
+            if(cbTipo.getSelectedIndex()==0){
+                tipo = "nomeArm";
+            }else if(cbTipo.getSelectedIndex()==1){
+                tipo = "tipoArm";
+            }else{
+                tipo = "calibreArm";
+            }
+            readJTableForDesc(tipo, EdPesquisarArm.getText());
         } catch (SQLException ex) {
             Logger.getLogger(FrArmas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -554,7 +572,7 @@ public class FrArmas extends javax.swing.JFrame {
             a.setNumArm(EdNum.getText());
             a.setIdArm(Integer.parseInt(EdIdArm.getText()));
             ar.updateArm(a);
-            
+
             readJTable();
         } catch (SQLException ex) {
             Logger.getLogger(FrCadastro.class.getName()).log(Level.SEVERE, null, ex);
@@ -575,10 +593,22 @@ public class FrArmas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tbArmasMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
+    private void EdPesquisarArmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EdPesquisarArmKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+/*
+            try {
+                readJTableForDesc(tipo, EdPesquisarArm.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(FrArmas.class.getName()).log(Level.SEVERE, null, ex);
+            }*/
+        }
+    
+    }//GEN-LAST:event_EdPesquisarArmKeyPressed
+
+/**
+ * @param args the command line arguments
+ */
+public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -589,16 +619,28 @@ public class FrArmas extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+                
+
+}
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrArmas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrArmas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrArmas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrArmas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrArmas.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        
+
+} catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(FrArmas.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        
+
+} catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(FrArmas.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        
+
+} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(FrArmas.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -607,8 +649,11 @@ public class FrArmas extends javax.swing.JFrame {
             public void run() {
                 try {
                     new FrArmas().setVisible(true);
-                } catch (SQLException ex) {
-                    Logger.getLogger(FrArmas.class.getName()).log(Level.SEVERE, null, ex);
+                
+
+} catch (SQLException ex) {
+                    Logger.getLogger(FrArmas.class
+.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -627,10 +672,11 @@ public class FrArmas extends javax.swing.JFrame {
     private javax.swing.JTextField EdNomeArm;
     private javax.swing.JTextField EdNum;
     private javax.swing.JTextField EdPesquisar;
-    private javax.swing.JTextField EdPesquisar1;
+    private javax.swing.JTextField EdPesquisarArm;
     private javax.swing.JTextField EdPrecoArm;
     private javax.swing.JTextField EdTipoArm;
     private javax.swing.JPanel PnArm;
+    private javax.swing.JComboBox<String> cbTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;

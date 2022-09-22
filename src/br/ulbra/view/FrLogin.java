@@ -22,19 +22,14 @@ public class FrLogin extends javax.swing.JFrame {
 
     /**
      * Creates new form FrLogin2
-     * @throws java.sql.SQLException
      */
     public FrLogin() throws SQLException {
-
+        initComponents();
         this.setLocationRelativeTo(null); //coloca o formulário no centro da tela 
-
-        FrLogin f = new FrLogin();
-        Toolkit tk = Toolkit.getDefaultToolkit();
-        int xSize = ((int) tk.getScreenSize().getWidth());
-        int ySize = ((int) tk.getScreenSize().getHeight());
-        f.setSize(xSize, ySize);
-        f.show();
+        
     }
+
+   
 
     /**
      * This method is called from within the constructor to initialize the form.

@@ -7,11 +7,16 @@ public class Usuario {
 
     private int idUsu;
     private String nomeUsu;
+    private String cepUsu;
+    private String logUsu;
+    private int numUsu;
+    private String bairroUsu;
+    private String cidadeUsu;
+    private String estadoUsu;
     private String emailUsu;
     private String telUsu;
     private int sexoUsu;
     private String senhaUsu;
-    private String ConfirmaSenhaUsu;
 
     public Usuario() {
 
@@ -26,7 +31,6 @@ public class Usuario {
         this.sexoUsu = sexoUso;
         this.senhaUsu = senhaUso;
     }
-    
 
     public int getIdUsu() {
         return idUsu;
@@ -76,8 +80,54 @@ public class Usuario {
         this.senhaUsu = senhaUsu;
     }
 
-    
-    
+    public String getCepUsu() {
+        return cepUsu;
+    }
+
+    public void setCepUsu(String cepUsu) {
+        this.cepUsu = cepUsu;
+    }
+
+    public String getLogUsu() {
+        return logUsu;
+    }
+
+    public void setLogUsu(String logUsu) {
+        this.logUsu = logUsu;
+    }
+
+    public int getNumUsu() {
+        return numUsu;
+    }
+
+    public void setNumUsu(int numUsu) {
+        this.numUsu = numUsu;
+    }
+
+    public String getBairroUsu() {
+        return bairroUsu;
+    }
+
+    public void setBairroUsu(String bairroUsu) {
+        this.bairroUsu = bairroUsu;
+    }
+
+    public String getCidadeUsu() {
+        return cidadeUsu;
+    }
+
+    public void setCidadeUsu(String cidadeUsu) {
+        this.cidadeUsu = cidadeUsu;
+    }
+
+    public String getEstadoUsu() {
+        return estadoUsu;
+    }
+
+    public void setEstadoUsu(String estadoUsu) {
+        this.estadoUsu = estadoUsu;
+    }
+
     public String toString() {
         return " ID: " + this.idUsu
                 + " Nome: " + this.nomeUsu

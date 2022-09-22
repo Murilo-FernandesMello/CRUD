@@ -49,14 +49,20 @@ public class UsuarioDAO {
 
         try {
 
-            stmt = con.prepareStatement("INSERT INTO tbUsuario(nomeUsu,emailUsu,telUsu,sexoUsu,senhaUsu) "
-                    + "VALUES (?,?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO tbUsuario(nomeUsu,cepUsu,logUsu,numUsu,bairroUsu,cidadeUsu,estadoUsu,emailUsu,telUsu,sexoUsu,senhaUsu) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?)");
 
             stmt.setString(1, u.getNomeUsu());
-            stmt.setString(2, u.getEmailUsu());
-            stmt.setString(3, u.getTelUsu());
-            stmt.setInt(4, u.getSexoUsu());
-            stmt.setString(5, u.getSenhaUsu());
+            stmt.setString(2, u.getCepUsu());
+            stmt.setString(3, u.getLogUsu());
+            stmt.setInt(4, u.getNumUsu());
+            stmt.setString(5, u.getBairroUsu());
+            stmt.setString(6, u.getCidadeUsu());
+            stmt.setString(7, u.getEstadoUsu());
+            stmt.setString(8, u.getEmailUsu());
+            stmt.setString(9, u.getTelUsu());
+            stmt.setInt(10, u.getSexoUsu());
+            stmt.setString(11, u.getSenhaUsu());
 
             stmt.executeUpdate();
 
@@ -101,20 +107,34 @@ public class UsuarioDAO {
         try {
 
             stmt = con.prepareStatement(
-                    "UPDATE tbUsuario SET nomeUsu =  ?, emailUsu = ?,"
+                    "UPDATE tbUsuario SET nomeUsu =  ?,cepUsu = ?,logUsu = ?,"
+                    + "numUsu = ?,bairroUsu = ?,cidadeUsu = ?,"
+                    + "estadoUsu = ?, emailUsu = ?,"
                     + " telUsu =  ?, sexoUsu =  ?,"
                     + " senhaUsu =  ? WHERE  idUsu =  ?  ");
             stmt.setString(1, u.getNomeUsu());
 
-            stmt.setString(2, u.getEmailUsu());
+            stmt.setString(2, u.getCepUsu());
 
-            stmt.setString(3, u.getTelUsu());
+            stmt.setString(3, u.getLogUsu());
 
-            stmt.setInt(4, u.getSexoUsu());
+            stmt.setInt(4, u.getNumUsu());
 
-            stmt.setString(5, u.getSenhaUsu());
+            stmt.setString(5, u.getBairroUsu());
 
-            stmt.setInt(6, u.getIdUsu());
+            stmt.setString(6, u.getCidadeUsu());
+
+            stmt.setString(7, u.getEstadoUsu());
+
+            stmt.setString(8, u.getEmailUsu());
+
+            stmt.setString(9, u.getTelUsu());
+
+            stmt.setInt(10, u.getSexoUsu());
+
+            stmt.setString(11, u.getSenhaUsu());
+
+            stmt.setInt(12, u.getIdUsu());
 
             stmt.executeUpdate();
 
@@ -139,6 +159,12 @@ public class UsuarioDAO {
                 Usuario usuario = new Usuario();
                 usuario.setIdUsu(rs.getInt("idUsu"));
                 usuario.setNomeUsu(rs.getString("nomeUsu"));
+                usuario.setCepUsu(rs.getString("cepUsu"));
+                usuario.setLogUsu(rs.getString("logUsu"));
+                usuario.setNumUsu(rs.getInt("numUsu"));
+                usuario.setBairroUsu(rs.getString("bairroUsu"));
+                usuario.setCidadeUsu(rs.getString("cidadeUsu"));
+                usuario.setEstadoUsu(rs.getString("estadoUsu"));
                 usuario.setEmailUsu(rs.getString("emailUsu"));
                 usuario.setTelUsu(rs.getString("telUsu"));
                 usuario.setSexoUsu(rs.getInt("sexoUsu"));
@@ -160,12 +186,18 @@ public class UsuarioDAO {
         ArrayList<Usuario> usuarios = new ArrayList<>();
         try {
             stmt = con.prepareStatement("SELECT * FROM tbUsuario WHERE nomeUsu LIKE ?");
-            stmt.setString(1, "%"+nome+"%");
+            stmt.setString(1, "%" + nome + "%");
             rs = stmt.executeQuery();
             while (rs.next()) {
                 Usuario usuario = new Usuario();
                 usuario.setIdUsu(rs.getInt("idUsu"));
                 usuario.setNomeUsu(rs.getString("nomeUsu"));
+                usuario.setCepUsu(rs.getString("cepUsu"));
+                usuario.setLogUsu(rs.getString("logUsu"));
+                usuario.setNumUsu(rs.getInt("numUsu"));
+                usuario.setBairroUsu(rs.getString("bairroUsu"));
+                usuario.setCidadeUsu(rs.getString("cidadeUsu"));
+                usuario.setEstadoUsu(rs.getString("estadoUsu"));
                 usuario.setEmailUsu(rs.getString("emailUsu"));
                 usuario.setTelUsu(rs.getString("telUsu"));
                 usuario.setSexoUsu(rs.getInt("sexoUsu"));
@@ -180,6 +212,5 @@ public class UsuarioDAO {
         }
         return usuarios;
     }
-    
-  
+
 }

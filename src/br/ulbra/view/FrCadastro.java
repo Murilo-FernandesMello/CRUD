@@ -28,16 +28,8 @@ public class FrCadastro extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null); //coloca o formulário no centro da tela 
         ControlarBtn(1);
-        EdIdCad.setEnabled(false);
+        EdCepCad.setEnabled(false);
         readJTable();
-        FullScreen();
-
-    }
-
-    public void FullScreen() throws SQLException {
-        FrCadastro fs = new FrCadastro();
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        fs.setSize(screenSize.width, screenSize.height);
 
     }
 
@@ -67,26 +59,39 @@ public class FrCadastro extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         BtNovoCad = new javax.swing.JButton();
         PnCad = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        BtAlterar = new javax.swing.JButton();
+        BtSalvar1 = new javax.swing.JButton();
+        BtExcluir = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
-        EdIdCad = new javax.swing.JTextField();
+        EdCepCad = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        EdNomeCad = new javax.swing.JTextField();
+        EdLograCad = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         EdEmailCadastro = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        RbMasc = new javax.swing.JRadioButton();
-        RbFem = new javax.swing.JRadioButton();
-        RbAlt = new javax.swing.JRadioButton();
-        jLabel13 = new javax.swing.JLabel();
-        BtAlterar = new javax.swing.JButton();
-        BtExcluir = new javax.swing.JButton();
         BtSalvar = new javax.swing.JButton();
         EdSenha1 = new javax.swing.JPasswordField();
         EdSenha2 = new javax.swing.JPasswordField();
         EdTel = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        EdIdCad1 = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        EdNomeCad1 = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        EdNumCad = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        EdBairroCad = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
+        EdCidadeCad = new javax.swing.JTextField();
+        RbMasc = new javax.swing.JRadioButton();
+        RbFem = new javax.swing.JRadioButton();
+        RbAlt = new javax.swing.JRadioButton();
+        jLabel24 = new javax.swing.JLabel();
+        EdEstadoCad = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
 
         jLabel2.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
@@ -107,7 +112,7 @@ public class FrCadastro extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("CADASTRO DE USUÁRIOS");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 11, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, -1, -1));
 
         jLabel9.setText("jLabel9");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(221, 450, -1, 0));
@@ -124,7 +129,7 @@ public class FrCadastro extends javax.swing.JFrame {
                 EdPesquisarActionPerformed(evt);
             }
         });
-        jPanel1.add(EdPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(79, 56, 303, 19));
+        jPanel1.add(EdPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(79, 56, 410, 19));
 
         BtPesquisar.setBackground(new java.awt.Color(255, 255, 255));
         BtPesquisar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
@@ -135,14 +140,14 @@ public class FrCadastro extends javax.swing.JFrame {
                 BtPesquisarActionPerformed(evt);
             }
         });
-        jPanel1.add(BtPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(392, 56, 28, -1));
+        jPanel1.add(BtPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 60, 28, -1));
 
         tbUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "COD", "NOME", "E-MAIL", "TELEFONE", "SEXO", "SENHA"
+                "COD", "NOME", "CEP", "LOGRADOURO", "Nº", "BAIRRO", "CIDADE", "E-MAIL", "TELEFONE", "SEXO", "SENHA"
             }
         ));
         tbUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -152,10 +157,10 @@ public class FrCadastro extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbUsuario);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 86, 409, 76));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 86, 600, 76));
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ulbra/img/bala.png"))); // NOI18N
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 12, -1, -1));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, -1));
 
         BtNovoCad.setBackground(new java.awt.Color(255, 255, 255));
         BtNovoCad.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
@@ -166,19 +171,53 @@ public class FrCadastro extends javax.swing.JFrame {
                 BtNovoCadActionPerformed(evt);
             }
         });
-        jPanel1.add(BtNovoCad, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 409, -1));
+        jPanel1.add(BtNovoCad, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 600, -1));
 
         PnCad.setBackground(new java.awt.Color(102, 102, 102));
 
+        jLabel13.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Opções");
+
+        BtAlterar.setBackground(new java.awt.Color(255, 255, 255));
+        BtAlterar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        BtAlterar.setText("Alterar");
+        BtAlterar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
+        BtAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtAlterarActionPerformed(evt);
+            }
+        });
+
+        BtSalvar1.setBackground(new java.awt.Color(255, 255, 255));
+        BtSalvar1.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        BtSalvar1.setText("Salvar");
+        BtSalvar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
+        BtSalvar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtSalvar1ActionPerformed(evt);
+            }
+        });
+
+        BtExcluir.setBackground(new java.awt.Color(255, 255, 255));
+        BtExcluir.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        BtExcluir.setText("Excluir");
+        BtExcluir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
+        BtExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtExcluirActionPerformed(evt);
+            }
+        });
+
         jLabel16.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setText("ID");
+        jLabel16.setText("Logra.");
 
-        EdIdCad.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
-        EdIdCad.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 51), 1, true));
-        EdIdCad.addActionListener(new java.awt.event.ActionListener() {
+        EdCepCad.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        EdCepCad.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 51), 1, true));
+        EdCepCad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EdIdCadActionPerformed(evt);
+                EdCepCadActionPerformed(evt);
             }
         });
 
@@ -186,11 +225,11 @@ public class FrCadastro extends javax.swing.JFrame {
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Nome");
 
-        EdNomeCad.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
-        EdNomeCad.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 51), 1, true));
-        EdNomeCad.addActionListener(new java.awt.event.ActionListener() {
+        EdLograCad.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        EdLograCad.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 51), 1, true));
+        EdLograCad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EdNomeCadActionPerformed(evt);
+                EdLograCadActionPerformed(evt);
             }
         });
 
@@ -221,6 +260,82 @@ public class FrCadastro extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Sexo");
+
+        BtSalvar.setBackground(new java.awt.Color(255, 255, 255));
+        BtSalvar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        BtSalvar.setText("Buscar CEP");
+        BtSalvar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
+        BtSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtSalvarActionPerformed(evt);
+            }
+        });
+
+        EdSenha1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
+
+        EdSenha2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
+
+        EdTel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 102)));
+
+        jLabel19.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setText("ID");
+
+        EdIdCad1.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        EdIdCad1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 51), 1, true));
+        EdIdCad1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EdIdCad1ActionPerformed(evt);
+            }
+        });
+
+        jLabel20.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setText("CEP");
+
+        EdNomeCad1.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        EdNomeCad1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 51), 1, true));
+        EdNomeCad1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EdNomeCad1ActionPerformed(evt);
+            }
+        });
+
+        jLabel21.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel21.setText("Nº");
+
+        EdNumCad.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        EdNumCad.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 51), 1, true));
+        EdNumCad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EdNumCadActionPerformed(evt);
+            }
+        });
+
+        jLabel22.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel22.setText("Bairro");
+
+        EdBairroCad.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        EdBairroCad.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 51), 1, true));
+        EdBairroCad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EdBairroCadActionPerformed(evt);
+            }
+        });
+
+        jLabel23.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel23.setText("Cidade");
+
+        EdCidadeCad.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        EdCidadeCad.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 51), 1, true));
+        EdCidadeCad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EdCidadeCadActionPerformed(evt);
+            }
+        });
 
         RbMasc.setBackground(new java.awt.Color(255, 0, 51));
         buttonGroup1.add(RbMasc);
@@ -258,161 +373,178 @@ public class FrCadastro extends javax.swing.JFrame {
             }
         });
 
-        jLabel13.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("Opções");
+        jLabel24.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel24.setText("Estado");
 
-        BtAlterar.setBackground(new java.awt.Color(255, 255, 255));
-        BtAlterar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        BtAlterar.setText("Alterar");
-        BtAlterar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
-        BtAlterar.addActionListener(new java.awt.event.ActionListener() {
+        EdEstadoCad.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        EdEstadoCad.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 51), 1, true));
+        EdEstadoCad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtAlterarActionPerformed(evt);
+                EdEstadoCadActionPerformed(evt);
             }
         });
-
-        BtExcluir.setBackground(new java.awt.Color(255, 255, 255));
-        BtExcluir.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        BtExcluir.setText("Excluir");
-        BtExcluir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
-        BtExcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtExcluirActionPerformed(evt);
-            }
-        });
-
-        BtSalvar.setBackground(new java.awt.Color(255, 255, 255));
-        BtSalvar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        BtSalvar.setText("Salvar");
-        BtSalvar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
-        BtSalvar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtSalvarActionPerformed(evt);
-            }
-        });
-
-        EdSenha1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
-
-        EdSenha2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
-
-        EdTel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 102)));
 
         javax.swing.GroupLayout PnCadLayout = new javax.swing.GroupLayout(PnCad);
         PnCad.setLayout(PnCadLayout);
         PnCadLayout.setHorizontalGroup(
             PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PnCadLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnCadLayout.createSequentialGroup()
+                .addContainerGap(96, Short.MAX_VALUE)
                 .addGroup(PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PnCadLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(EdSenha2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PnCadLayout.createSequentialGroup()
+                        .addComponent(jLabel19)
+                        .addGap(18, 18, 18)
+                        .addComponent(EdIdCad1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(EdNomeCad1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PnCadLayout.createSequentialGroup()
+                        .addGroup(PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(PnCadLayout.createSequentialGroup()
+                                .addComponent(jLabel22)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(EdBairroCad, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PnCadLayout.createSequentialGroup()
                                 .addComponent(jLabel16)
-                                .addGap(4, 4, 4)
-                                .addComponent(EdIdCad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel15)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(EdNomeCad))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(EdLograCad, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(PnCadLayout.createSequentialGroup()
+                                .addComponent(jLabel23)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(EdCidadeCad, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PnCadLayout.createSequentialGroup()
+                                .addComponent(jLabel24)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(EdEstadoCad, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PnCadLayout.createSequentialGroup()
                                 .addComponent(jLabel14)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(EdEmailCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(PnCadLayout.createSequentialGroup()
-                        .addContainerGap()
+                                .addComponent(EdEmailCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PnCadLayout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addGap(18, 18, 18)
-                                .addComponent(BtSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(BtExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(BtAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnCadLayout.createSequentialGroup()
-                                .addGroup(PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(PnCadLayout.createSequentialGroup()
-                                        .addComponent(jLabel7)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(EdTel, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
-                                    .addGroup(PnCadLayout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(EdSenha1)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel8)
+                                .addGap(58, 58, 58)
+                                .addComponent(jLabel8))
+                            .addGroup(PnCadLayout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(jLabel21)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(PnCadLayout.createSequentialGroup()
-                                        .addComponent(RbMasc)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(RbFem)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(RbAlt))
-                                    .addGroup(PnCadLayout.createSequentialGroup()
-                                        .addComponent(jLabel17)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(EdSenha2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addContainerGap())
+                                    .addComponent(RbMasc, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(EdNumCad, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(RbFem, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(RbAlt, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(PnCadLayout.createSequentialGroup()
+                        .addComponent(jLabel20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(EdCepCad, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(BtSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PnCadLayout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(EdSenha1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PnCadLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(EdTel, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PnCadLayout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtSalvar1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(70, 70, 70))
         );
         PnCadLayout.setVerticalGroup(
             PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnCadLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel16)
+                .addContainerGap()
+                .addGroup(PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(EdIdCad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15)
-                    .addGroup(PnCadLayout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addGroup(PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(EdIdCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(EdNomeCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(11, 11, 11)
+                    .addComponent(EdNomeCad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(EdCepCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtSalvar))
+                .addGap(18, 18, 18)
+                .addGroup(PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(EdLograCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel21)
+                    .addComponent(EdNumCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22)
+                    .addComponent(EdBairroCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
                 .addGroup(PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14)
                     .addGroup(PnCadLayout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(EdEmailCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(3, 3, 3)
+                        .addComponent(RbMasc)
+                        .addGap(9, 9, 9)
+                        .addComponent(RbFem)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(RbAlt))
+                    .addGroup(PnCadLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel23)
+                            .addComponent(EdCidadeCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addGroup(PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel24)
+                            .addComponent(EdEstadoCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14)
+                            .addComponent(EdEmailCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
+                    .addComponent(EdSenha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
-                    .addComponent(EdSenha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(EdSenha2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel8)
-                    .addComponent(RbMasc)
-                    .addComponent(RbFem)
-                    .addComponent(RbAlt)
                     .addComponent(EdTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addGroup(PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13)
-                    .addComponent(BtSalvar)
-                    .addComponent(BtExcluir)
-                    .addComponent(BtAlterar))
-                .addContainerGap(23, Short.MAX_VALUE))
+                    .addGroup(PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(BtSalvar1)
+                        .addComponent(BtAlterar)
+                        .addComponent(BtExcluir)))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
 
-        jPanel1.add(PnCad, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 222, 424, -1));
+        jPanel1.add(PnCad, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 530, 470));
 
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ulbra/img/bala.png"))); // NOI18N
-        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(341, 11, -1, -1));
+        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)
         );
 
         pack();
@@ -423,7 +555,13 @@ public class FrCadastro extends javax.swing.JFrame {
         Usuario u = new Usuario();
         try {
             UsuarioDAO ud = new UsuarioDAO();
-            u.setNomeUsu(EdNomeCad.getText());
+            u.setNomeUsu(EdLograCad.getText());
+             u.setCepUsu(EdCepCad.getText());
+            u.setLogUsu(EdLograCad.getText());
+            u.setNumUsu(Integer.parseInt(EdNumCad.getText()));
+            u.setBairroUsu(EdBairroCad.getText());
+            u.setCidadeUsu(EdCidadeCad.getText());
+            u.setEstadoUsu(EdEstadoCad.getText());
             u.setEmailUsu(EdEmailCadastro.getText());
             u.setTelUsu(EdTel.getText());
             u.setSenhaUsu(EdSenha1.getText());
@@ -442,7 +580,7 @@ public class FrCadastro extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "As senhas estão diferentes!");
             }
-            FullScreen();
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "ERRO: " + ex.getMessage());
         }
@@ -455,7 +593,7 @@ public class FrCadastro extends javax.swing.JFrame {
 
         try {
             UsuarioDAO ud = new UsuarioDAO();
-            u.setIdUsu(Integer.parseInt(EdIdCad.getText()));
+            u.setIdUsu(Integer.parseInt(EdCepCad.getText()));
             if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja Excluir?", "Confirme exclusão", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 ud.delete(u);
                 readJTable();
@@ -475,7 +613,13 @@ public class FrCadastro extends javax.swing.JFrame {
         Usuario u = new Usuario();
         try {
             UsuarioDAO ud = new UsuarioDAO();
-            u.setNomeUsu(EdNomeCad.getText());
+            u.setNomeUsu(EdLograCad.getText());
+            u.setCepUsu(EdCepCad.getText());
+            u.setLogUsu(EdLograCad.getText());
+            u.setNumUsu(Integer.parseInt(EdNumCad.getText()));
+            u.setBairroUsu(EdBairroCad.getText());
+            u.setCidadeUsu(EdCidadeCad.getText());
+            u.setEstadoUsu(EdEstadoCad.getText());
             u.setEmailUsu(EdEmailCadastro.getText());
             u.setSenhaUsu(EdSenha1.getText());
             u.setTelUsu(EdTel.getText());
@@ -487,7 +631,7 @@ public class FrCadastro extends javax.swing.JFrame {
                 u.setSexoUsu(3);
             }
             if (EdSenha1.getText().equals(EdSenha2.getText())) {
-                u.setIdUsu(Integer.parseInt(EdIdCad.getText()));
+                u.setIdUsu(Integer.parseInt(EdCepCad.getText()));
                 ud.update(u);
                 readJTable();
                 ControlarBtn(1);
@@ -517,13 +661,13 @@ public class FrCadastro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_EdEmailCadastroActionPerformed
 
-    private void EdNomeCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdNomeCadActionPerformed
+    private void EdLograCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdLograCadActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_EdNomeCadActionPerformed
+    }//GEN-LAST:event_EdLograCadActionPerformed
 
-    private void EdIdCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdIdCadActionPerformed
+    private void EdCepCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdCepCadActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_EdIdCadActionPerformed
+    }//GEN-LAST:event_EdCepCadActionPerformed
 
     private void BtNovoCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtNovoCadActionPerformed
         ControlarBtn(2);
@@ -533,11 +677,17 @@ public class FrCadastro extends javax.swing.JFrame {
     private void tbUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUsuarioMouseClicked
         ControlarBtn(3);
         if (tbUsuario.getSelectedRow() != -1) {
-            EdIdCad.setText(tbUsuario.getValueAt(tbUsuario.getSelectedRow(), 0).toString());
-            EdNomeCad.setText(tbUsuario.getValueAt(tbUsuario.getSelectedRow(), 1).toString());
-            EdEmailCadastro.setText(tbUsuario.getValueAt(tbUsuario.getSelectedRow(), 2).toString());
-            EdTel.setText(tbUsuario.getValueAt(tbUsuario.getSelectedRow(), 3).toString());
-            int s = (int) tbUsuario.getValueAt(tbUsuario.getSelectedRow(), 4);
+            EdIdCad1.setText(tbUsuario.getValueAt(tbUsuario.getSelectedRow(), 0).toString());
+            EdNomeCad1.setText(tbUsuario.getValueAt(tbUsuario.getSelectedRow(), 1).toString());
+            EdCepCad.setText(tbUsuario.getValueAt(tbUsuario.getSelectedRow(), 2).toString());
+            EdLograCad.setText(tbUsuario.getValueAt(tbUsuario.getSelectedRow(), 3).toString());
+            EdNumCad.setText(tbUsuario.getValueAt(tbUsuario.getSelectedRow(), 4).toString());
+            EdBairroCad.setText(tbUsuario.getValueAt(tbUsuario.getSelectedRow(), 5).toString());
+            EdCidadeCad.setText(tbUsuario.getValueAt(tbUsuario.getSelectedRow(), 6).toString());
+            EdEstadoCad.setText(tbUsuario.getValueAt(tbUsuario.getSelectedRow(), 7).toString());
+            EdEmailCadastro.setText(tbUsuario.getValueAt(tbUsuario.getSelectedRow(), 8).toString());
+            EdTel.setText(tbUsuario.getValueAt(tbUsuario.getSelectedRow(), 9).toString());
+            int s = (int) tbUsuario.getValueAt(tbUsuario.getSelectedRow(), 10);
             if (s == 1) {
                 RbMasc.setSelected(true);
             } else if (s == 2) {
@@ -546,7 +696,7 @@ public class FrCadastro extends javax.swing.JFrame {
                 RbAlt.setSelected(true);
             }
 
-            EdSenha1.setText(tbUsuario.getValueAt(tbUsuario.getSelectedRow(), 5).toString());
+            EdSenha1.setText(tbUsuario.getValueAt(tbUsuario.getSelectedRow(), 11).toString());
             EdSenha2.setText(EdSenha1.getText());
         }
     }//GEN-LAST:event_tbUsuarioMouseClicked
@@ -562,6 +712,34 @@ public class FrCadastro extends javax.swing.JFrame {
     private void EdPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdPesquisarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_EdPesquisarActionPerformed
+
+    private void EdIdCad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdIdCad1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EdIdCad1ActionPerformed
+
+    private void EdNomeCad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdNomeCad1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EdNomeCad1ActionPerformed
+
+    private void BtSalvar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtSalvar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtSalvar1ActionPerformed
+
+    private void EdNumCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdNumCadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EdNumCadActionPerformed
+
+    private void EdBairroCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdBairroCadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EdBairroCadActionPerformed
+
+    private void EdCidadeCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdCidadeCadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EdCidadeCadActionPerformed
+
+    private void EdEstadoCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdEstadoCadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EdEstadoCadActionPerformed
 
     public void ControlarBtn(int op) {
         switch (op) {
@@ -597,6 +775,12 @@ public class FrCadastro extends javax.swing.JFrame {
             modelo.addRow(new Object[]{
                 p.getIdUsu(),
                 p.getNomeUsu(),
+                p.getCepUsu(),
+                p.getLogUsu(),
+                p.getNumUsu(),
+                p.getBairroUsu(),
+                p.getCidadeUsu(),
+                p.getEstadoUsu(),
                 p.getEmailUsu(),
                 p.getTelUsu(),
                 p.getSexoUsu(),
@@ -614,6 +798,12 @@ public class FrCadastro extends javax.swing.JFrame {
             modelo.addRow(new Object[]{
                 p.getIdUsu(),
                 p.getNomeUsu(),
+                p.getCepUsu(),
+                p.getLogUsu(),
+                p.getNumUsu(),
+                p.getBairroUsu(),
+                p.getCidadeUsu(),
+                p.getEstadoUsu(),
                 p.getEmailUsu(),
                 p.getTelUsu(),
                 p.getSexoUsu(),
@@ -669,9 +859,16 @@ public class FrCadastro extends javax.swing.JFrame {
     private javax.swing.JButton BtNovoCad;
     private javax.swing.JButton BtPesquisar;
     private javax.swing.JButton BtSalvar;
+    private javax.swing.JButton BtSalvar1;
+    private javax.swing.JTextField EdBairroCad;
+    private javax.swing.JTextField EdCepCad;
+    private javax.swing.JTextField EdCidadeCad;
     private javax.swing.JTextField EdEmailCadastro;
-    private javax.swing.JTextField EdIdCad;
-    private javax.swing.JTextField EdNomeCad;
+    private javax.swing.JTextField EdEstadoCad;
+    private javax.swing.JTextField EdIdCad1;
+    private javax.swing.JTextField EdLograCad;
+    private javax.swing.JTextField EdNomeCad1;
+    private javax.swing.JTextField EdNumCad;
     private javax.swing.JTextField EdPesquisar;
     private javax.swing.JPasswordField EdSenha1;
     private javax.swing.JPasswordField EdSenha2;
@@ -694,7 +891,13 @@ public class FrCadastro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

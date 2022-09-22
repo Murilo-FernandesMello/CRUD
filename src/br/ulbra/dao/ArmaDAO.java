@@ -137,13 +137,15 @@ public class ArmaDAO {
         return (ArrayList<Armas>) armas;
     }
 
-    public List<Armas> readForDesc(String nome) {
+    public List<Armas> readForDesc(String tipo, String nome ) {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         ArrayList<Armas> armas = new ArrayList<>();
+        String script = " where "+tipo+" LIKE '%"+nome+"%'";
         try {
-            stmt = (PreparedStatement) con.prepareStatement("SELECT * FROM tbArmas WHERE nomeArm LIKE");
-            stmt.setString(1, "%" + nome + "%");
+            stmt = con.prepareStatement("SELECT * FROM tbArmas "+script);
+            
+            
             rs = stmt.executeQuery();
             while (rs.next()) {
                 Armas arma = new Armas();
@@ -151,7 +153,7 @@ public class ArmaDAO {
                 arma.setNomeArm(rs.getString("nomeArm"));
                 arma.setTipoArm(rs.getString("tipoArm"));
                 arma.setCalibreArm(rs.getString("calibreArm"));
-                arma.setFuncArm(rs.getString("funcArm"));
+                arma.setFuncArm(rs.getString("FuncArm"));
                 arma.setPrecoArm(rs.getDouble("precoArm"));
                 arma.setNumArm(rs.getString("numArm"));
                 armas.add(arma);
