@@ -84,7 +84,7 @@ public class UsuarioDAO {
         PreparedStatement stmt = null;
         try {
 
-            stmt = con.prepareStatement("DELETE FROM tbUsuario WHERE idUsu =  ?");
+            stmt = con.prepareStatement("DELETE FROM tbUsuario WHERE idUsu = ?");
 
             stmt.setInt(1, u.getIdUsu());
 
@@ -107,8 +107,8 @@ public class UsuarioDAO {
         try {
 
             stmt = con.prepareStatement(
-                    "UPDATE tbUsuario SET nomeUsu =  ?,cepUsu = ?,logUsu = ?,"
-                    + "numUsu = ?,bairroUsu = ?,cidadeUsu = ?,"
+                    "UPDATE tbUsuario SET nomeUsu = ?, cepUsu = ?, logUsu = ?,"
+                    + "numUsu = ?, bairroUsu = ?, cidadeUsu = ?,"
                     + "estadoUsu = ?, emailUsu = ?,"
                     + " telUsu =  ?, sexoUsu =  ?,"
                     + " senhaUsu =  ? WHERE  idUsu =  ?  ");

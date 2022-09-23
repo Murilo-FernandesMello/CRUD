@@ -186,7 +186,7 @@
             <Component class="javax.swing.JTable" name="tbUsuario">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="11" rowCount="1">
+                  <Table columnCount="12" rowCount="1">
                     <Column editable="true" title="COD" type="java.lang.Object"/>
                     <Column editable="true" title="NOME" type="java.lang.Object"/>
                     <Column editable="true" title="CEP" type="java.lang.Object"/>
@@ -194,6 +194,7 @@
                     <Column editable="true" title="N&#xba;" type="java.lang.Object"/>
                     <Column editable="true" title="BAIRRO" type="java.lang.Object"/>
                     <Column editable="true" title="CIDADE" type="java.lang.Object"/>
+                    <Column editable="true" title="ESTADO" type="java.lang.Object"/>
                     <Column editable="true" title="E-MAIL" type="java.lang.Object"/>
                     <Column editable="true" title="TELEFONE" type="java.lang.Object"/>
                     <Column editable="true" title="SEXO" type="java.lang.Object"/>
@@ -202,6 +203,11 @@
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
@@ -337,7 +343,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="EdNomeCad1" min="-2" pref="217" max="-2" attributes="0"/>
+                              <Component id="EdNomeCad" min="-2" pref="217" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
@@ -390,7 +396,7 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="EdCepCad" min="-2" pref="80" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="BtSalvar" min="-2" pref="90" max="-2" attributes="0"/>
+                              <Component id="BtBuscarCEP" min="-2" pref="90" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
@@ -405,7 +411,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="BtSalvar1" min="-2" pref="74" max="-2" attributes="0"/>
+                              <Component id="BtSalvar" min="-2" pref="74" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="BtAlterar" min="-2" pref="74" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -424,13 +430,13 @@
                           <Component id="jLabel19" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="EdIdCad1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="EdNomeCad1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="EdNomeCad" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel20" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="EdCepCad" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="BtSalvar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="BtBuscarCEP" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -491,7 +497,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="BtSalvar1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="BtSalvar" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="BtAlterar" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="BtExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -534,7 +540,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtAlterarActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="BtSalvar1">
+            <Component class="javax.swing.JButton" name="BtSalvar">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -552,7 +558,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtSalvar1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtSalvarActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="BtExcluir">
@@ -704,7 +710,7 @@
                 <Property name="text" type="java.lang.String" value="Sexo"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="BtSalvar">
+            <Component class="javax.swing.JButton" name="BtBuscarCEP">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -722,7 +728,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtSalvarActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtBuscarCEPActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JPasswordField" name="EdSenha1">
@@ -797,7 +803,7 @@
                 <Property name="text" type="java.lang.String" value="CEP"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="EdNomeCad1">
+            <Component class="javax.swing.JTextField" name="EdNomeCad">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Yu Gothic UI" size="12" style="0"/>
@@ -811,7 +817,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EdNomeCad1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EdNomeCadActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel21">

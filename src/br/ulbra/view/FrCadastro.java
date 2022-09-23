@@ -9,9 +9,15 @@ import br.ulbra.entity.Usuario;
 import br.ulbra.dao.UsuarioDAO;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static javax.management.Query.gt;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -28,8 +34,9 @@ public class FrCadastro extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null); //coloca o formulário no centro da tela 
         ControlarBtn(1);
-        EdCepCad.setEnabled(false);
+        EdIdCad1.setEnabled(false);
         readJTable();
+        BtBuscarCEP.setEnabled(true);
 
     }
 
@@ -61,7 +68,7 @@ public class FrCadastro extends javax.swing.JFrame {
         PnCad = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         BtAlterar = new javax.swing.JButton();
-        BtSalvar1 = new javax.swing.JButton();
+        BtSalvar = new javax.swing.JButton();
         BtExcluir = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         EdCepCad = new javax.swing.JTextField();
@@ -73,14 +80,14 @@ public class FrCadastro extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        BtSalvar = new javax.swing.JButton();
+        BtBuscarCEP = new javax.swing.JButton();
         EdSenha1 = new javax.swing.JPasswordField();
         EdSenha2 = new javax.swing.JPasswordField();
         EdTel = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         EdIdCad1 = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
-        EdNomeCad1 = new javax.swing.JTextField();
+        EdNomeCad = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         EdNumCad = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
@@ -144,10 +151,10 @@ public class FrCadastro extends javax.swing.JFrame {
 
         tbUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "COD", "NOME", "CEP", "LOGRADOURO", "Nº", "BAIRRO", "CIDADE", "E-MAIL", "TELEFONE", "SEXO", "SENHA"
+                "COD", "NOME", "CEP", "LOGRADOURO", "Nº", "BAIRRO", "CIDADE", "ESTADO", "E-MAIL", "TELEFONE", "SEXO", "SENHA"
             }
         ));
         tbUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -189,13 +196,13 @@ public class FrCadastro extends javax.swing.JFrame {
             }
         });
 
-        BtSalvar1.setBackground(new java.awt.Color(255, 255, 255));
-        BtSalvar1.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        BtSalvar1.setText("Salvar");
-        BtSalvar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
-        BtSalvar1.addActionListener(new java.awt.event.ActionListener() {
+        BtSalvar.setBackground(new java.awt.Color(255, 255, 255));
+        BtSalvar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        BtSalvar.setText("Salvar");
+        BtSalvar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
+        BtSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtSalvar1ActionPerformed(evt);
+                BtSalvarActionPerformed(evt);
             }
         });
 
@@ -261,13 +268,13 @@ public class FrCadastro extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Sexo");
 
-        BtSalvar.setBackground(new java.awt.Color(255, 255, 255));
-        BtSalvar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        BtSalvar.setText("Buscar CEP");
-        BtSalvar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
-        BtSalvar.addActionListener(new java.awt.event.ActionListener() {
+        BtBuscarCEP.setBackground(new java.awt.Color(255, 255, 255));
+        BtBuscarCEP.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        BtBuscarCEP.setText("Buscar CEP");
+        BtBuscarCEP.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
+        BtBuscarCEP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtSalvarActionPerformed(evt);
+                BtBuscarCEPActionPerformed(evt);
             }
         });
 
@@ -293,11 +300,11 @@ public class FrCadastro extends javax.swing.JFrame {
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setText("CEP");
 
-        EdNomeCad1.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
-        EdNomeCad1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 51), 1, true));
-        EdNomeCad1.addActionListener(new java.awt.event.ActionListener() {
+        EdNomeCad.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        EdNomeCad.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 51), 1, true));
+        EdNomeCad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EdNomeCad1ActionPerformed(evt);
+                EdNomeCadActionPerformed(evt);
             }
         });
 
@@ -403,7 +410,7 @@ public class FrCadastro extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(EdNomeCad1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(EdNomeCad, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PnCadLayout.createSequentialGroup()
                         .addGroup(PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(PnCadLayout.createSequentialGroup()
@@ -444,7 +451,7 @@ public class FrCadastro extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(EdCepCad, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(BtSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(BtBuscarCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PnCadLayout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -456,7 +463,7 @@ public class FrCadastro extends javax.swing.JFrame {
                     .addGroup(PnCadLayout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtSalvar1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -471,12 +478,12 @@ public class FrCadastro extends javax.swing.JFrame {
                     .addComponent(jLabel19)
                     .addComponent(EdIdCad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15)
-                    .addComponent(EdNomeCad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(EdNomeCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
                     .addComponent(EdCepCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtSalvar))
+                    .addComponent(BtBuscarCEP))
                 .addGap(18, 18, 18)
                 .addGroup(PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(EdLograCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -525,7 +532,7 @@ public class FrCadastro extends javax.swing.JFrame {
                 .addGroup(PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13)
                     .addGroup(PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(BtSalvar1)
+                        .addComponent(BtSalvar)
                         .addComponent(BtAlterar)
                         .addComponent(BtExcluir)))
                 .addContainerGap(96, Short.MAX_VALUE))
@@ -550,42 +557,8 @@ public class FrCadastro extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtSalvarActionPerformed
-        ControlarBtn(1);
-        Usuario u = new Usuario();
-        try {
-            UsuarioDAO ud = new UsuarioDAO();
-            u.setNomeUsu(EdLograCad.getText());
-             u.setCepUsu(EdCepCad.getText());
-            u.setLogUsu(EdLograCad.getText());
-            u.setNumUsu(Integer.parseInt(EdNumCad.getText()));
-            u.setBairroUsu(EdBairroCad.getText());
-            u.setCidadeUsu(EdCidadeCad.getText());
-            u.setEstadoUsu(EdEstadoCad.getText());
-            u.setEmailUsu(EdEmailCadastro.getText());
-            u.setTelUsu(EdTel.getText());
-            u.setSenhaUsu(EdSenha1.getText());
-
-            if (RbMasc.isSelected()) {
-                u.setSexoUsu(1);
-            } else if (RbFem.isSelected()) {
-                u.setSexoUsu(2);
-            } else {
-                u.setSexoUsu(3);
-            }
-
-            if (EdSenha1.getText().equals(EdSenha2.getText())) {
-                ud.create(u);
-                readJTable();
-            } else {
-                JOptionPane.showMessageDialog(null, "As senhas estão diferentes!");
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "ERRO: " + ex.getMessage());
-        }
-
-    }//GEN-LAST:event_BtSalvarActionPerformed
+    private void BtBuscarCEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtBuscarCEPActionPerformed
+    }//GEN-LAST:event_BtBuscarCEPActionPerformed
 
     private void BtExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtExcluirActionPerformed
 
@@ -593,7 +566,7 @@ public class FrCadastro extends javax.swing.JFrame {
 
         try {
             UsuarioDAO ud = new UsuarioDAO();
-            u.setIdUsu(Integer.parseInt(EdCepCad.getText()));
+            u.setIdUsu(Integer.parseInt(EdIdCad1.getText()));
             if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja Excluir?", "Confirme exclusão", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 ud.delete(u);
                 readJTable();
@@ -613,7 +586,7 @@ public class FrCadastro extends javax.swing.JFrame {
         Usuario u = new Usuario();
         try {
             UsuarioDAO ud = new UsuarioDAO();
-            u.setNomeUsu(EdLograCad.getText());
+            u.setNomeUsu(EdNomeCad.getText());
             u.setCepUsu(EdCepCad.getText());
             u.setLogUsu(EdLograCad.getText());
             u.setNumUsu(Integer.parseInt(EdNumCad.getText()));
@@ -631,7 +604,7 @@ public class FrCadastro extends javax.swing.JFrame {
                 u.setSexoUsu(3);
             }
             if (EdSenha1.getText().equals(EdSenha2.getText())) {
-                u.setIdUsu(Integer.parseInt(EdCepCad.getText()));
+                u.setIdUsu(Integer.parseInt(EdIdCad1.getText()));
                 ud.update(u);
                 readJTable();
                 ControlarBtn(1);
@@ -665,10 +638,6 @@ public class FrCadastro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_EdLograCadActionPerformed
 
-    private void EdCepCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdCepCadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EdCepCadActionPerformed
-
     private void BtNovoCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtNovoCadActionPerformed
         ControlarBtn(2);
 
@@ -678,7 +647,7 @@ public class FrCadastro extends javax.swing.JFrame {
         ControlarBtn(3);
         if (tbUsuario.getSelectedRow() != -1) {
             EdIdCad1.setText(tbUsuario.getValueAt(tbUsuario.getSelectedRow(), 0).toString());
-            EdNomeCad1.setText(tbUsuario.getValueAt(tbUsuario.getSelectedRow(), 1).toString());
+            EdNomeCad.setText(tbUsuario.getValueAt(tbUsuario.getSelectedRow(), 1).toString());
             EdCepCad.setText(tbUsuario.getValueAt(tbUsuario.getSelectedRow(), 2).toString());
             EdLograCad.setText(tbUsuario.getValueAt(tbUsuario.getSelectedRow(), 3).toString());
             EdNumCad.setText(tbUsuario.getValueAt(tbUsuario.getSelectedRow(), 4).toString());
@@ -713,17 +682,45 @@ public class FrCadastro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_EdPesquisarActionPerformed
 
-    private void EdIdCad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdIdCad1ActionPerformed
+    private void EdNomeCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdNomeCadActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_EdIdCad1ActionPerformed
+    }//GEN-LAST:event_EdNomeCadActionPerformed
 
-    private void EdNomeCad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdNomeCad1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EdNomeCad1ActionPerformed
+    private void BtSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtSalvarActionPerformed
+        ControlarBtn(1);
+        Usuario u = new Usuario();
+        try {
+            UsuarioDAO ud = new UsuarioDAO();
+            u.setNomeUsu(EdNomeCad.getText());
+            u.setCepUsu(EdCepCad.getText());
+            u.setLogUsu(EdLograCad.getText());
+            u.setNumUsu(Integer.parseInt(EdNumCad.getText()));
+            u.setBairroUsu(EdBairroCad.getText());
+            u.setCidadeUsu(EdCidadeCad.getText());
+            u.setEstadoUsu(EdEstadoCad.getText());
+            u.setEmailUsu(EdEmailCadastro.getText());
+            u.setTelUsu(EdTel.getText());
+            u.setSenhaUsu(EdSenha1.getText());
 
-    private void BtSalvar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtSalvar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtSalvar1ActionPerformed
+            if (RbMasc.isSelected()) {
+                u.setSexoUsu(1);
+            } else if (RbFem.isSelected()) {
+                u.setSexoUsu(2);
+            } else {
+                u.setSexoUsu(3);
+            }
+
+            if (EdSenha1.getText().equals(EdSenha2.getText())) {
+                ud.create(u);
+                readJTable();
+            } else {
+                JOptionPane.showMessageDialog(null, "As senhas estão diferentes!");
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERRO: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_BtSalvarActionPerformed
 
     private void EdNumCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdNumCadActionPerformed
         // TODO add your handling code here:
@@ -741,12 +738,19 @@ public class FrCadastro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_EdEstadoCadActionPerformed
 
+    private void EdIdCad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdIdCad1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EdIdCad1ActionPerformed
+
+    private void EdCepCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdCepCadActionPerformed
+        ControlarBtn(1);
+    }//GEN-LAST:event_EdCepCadActionPerformed
+
     public void ControlarBtn(int op) {
         switch (op) {
             case 1:
                 PnCad.setVisible(false);
                 BtSalvar.setEnabled(true);
-
                 break;
 
             case 2:
@@ -812,6 +816,38 @@ public class FrCadastro extends javax.swing.JFrame {
         }
     }
 
+    public void buscarCep(String cep) {
+        String json;
+        try {
+            URL url = new URL("http://viacep.com.br/ws/" + cep + "/json");
+            URLConnection urlConnection = url.eopenConnection();
+            InputStream is = urlConnection.getInputStream();
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            StringBuilder jsonSb = new StringBuilder();
+            br.lines().forEach(l -> jsonSb.append(l.trim()));
+            json = jsonSb.toString();
+            JOptionPane.showMessageDialog(null, json);
+            json = json.replaceAll( "[{},:]","");
+json = json.replaceAll("\"", "\n");
+            String array[] = new String[30];
+            array = json.split("\n");
+            JOptionPane.showMessageDialog(null, array);
+            String logradouro = array[7];
+            String bairro = array[15];
+            String cidade = array[19];
+            String uf = array[23];
+            EdLograCad.setText(logradouro);
+            EdBairroCad.setText(bairro);
+            EdCidadeCad.setText(cidade);
+            EdEstadoCad.setText(uf);
+            JOptionPane.showMessageDialog(null, logradouro + " " + bairro + " "
+                    + cidade + " " + uf);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null, "Erro" + e.getMessage());
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -855,11 +891,11 @@ public class FrCadastro extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtAlterar;
+    private javax.swing.JButton BtBuscarCEP;
     private javax.swing.JButton BtExcluir;
     private javax.swing.JButton BtNovoCad;
     private javax.swing.JButton BtPesquisar;
     private javax.swing.JButton BtSalvar;
-    private javax.swing.JButton BtSalvar1;
     private javax.swing.JTextField EdBairroCad;
     private javax.swing.JTextField EdCepCad;
     private javax.swing.JTextField EdCidadeCad;
@@ -867,7 +903,7 @@ public class FrCadastro extends javax.swing.JFrame {
     private javax.swing.JTextField EdEstadoCad;
     private javax.swing.JTextField EdIdCad1;
     private javax.swing.JTextField EdLograCad;
-    private javax.swing.JTextField EdNomeCad1;
+    private javax.swing.JTextField EdNomeCad;
     private javax.swing.JTextField EdNumCad;
     private javax.swing.JTextField EdPesquisar;
     private javax.swing.JPasswordField EdSenha1;

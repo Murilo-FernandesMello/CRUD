@@ -442,6 +442,11 @@ public class FrArmas extends javax.swing.JFrame {
         jPanel1.add(PnArm, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 217, -1, -1));
 
         cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "Tipo", "Calibre" }));
+        cbTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTipoActionPerformed(evt);
+            }
+        });
         jPanel1.add(cbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, 150, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -604,6 +609,10 @@ public class FrArmas extends javax.swing.JFrame {
         }
     
     }//GEN-LAST:event_EdPesquisarArmKeyPressed
+
+    private void cbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbTipoActionPerformed
 
 /**
  * @param args the command line arguments

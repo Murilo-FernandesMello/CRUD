@@ -90,6 +90,7 @@ public class ArmaDAO {
 
             stmt.setString(3, arm.getCalibreArm());
 
+            
             stmt.setString(4, arm.getFuncArm());
 
             stmt.setDouble(5, arm.getPrecoArm());
