@@ -147,7 +147,7 @@ public class FrMenu extends javax.swing.JFrame {
 
     private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
         this.dispose();
-        
+
 
     }//GEN-LAST:event_jMenuSairActionPerformed
 

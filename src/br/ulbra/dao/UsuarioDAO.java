@@ -153,7 +153,7 @@ public class UsuarioDAO {
         ResultSet rs = null;
         List<Usuario> usuarios = new ArrayList<>();
         try {
-            stmt = (PreparedStatement) con.prepareStatement("SELECT * FROM tbUsuario");
+            stmt = (PreparedStatement) con.prepareStatement("SELECT * FROM tbUsuario ");
             rs = stmt.executeQuery();
             while (rs.next()) {
                 Usuario usuario = new Usuario();
@@ -180,13 +180,48 @@ public class UsuarioDAO {
         return (ArrayList<Usuario>) usuarios;
     }
 
-    public List<Usuario> readForDesc(String nome) {
+    public ArrayList<Usuario> readDesc() {
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        ArrayList<Usuario> usuarios = new ArrayList<>();
+        List<Usuario> usuarios = new ArrayList<>();
         try {
-            stmt = con.prepareStatement("SELECT * FROM tbUsuario WHERE nomeUsu LIKE ?");
-            stmt.setString(1, "%" + nome + "%");
+            stmt = (PreparedStatement) con.prepareStatement("SELECT * FROM tbUsuario ORDER BY nomeUsu DESC");
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                Usuario usuario = new Usuario();
+                usuario.setIdUsu(rs.getInt("idUsu"));
+                usuario.setNomeUsu(rs.getString("nomeUsu"));
+                usuario.setCepUsu(rs.getString("cepUsu"));
+                usuario.setLogUsu(rs.getString("logUsu"));
+                usuario.setNumUsu(rs.getInt("numUsu"));
+                usuario.setBairroUsu(rs.getString("bairroUsu"));
+                usuario.setCidadeUsu(rs.getString("cidadeUsu"));
+                usuario.setEstadoUsu(rs.getString("estadoUsu"));
+                usuario.setEmailUsu(rs.getString("emailUsu"));
+                usuario.setTelUsu(rs.getString("telUsu"));
+                usuario.setSexoUsu(rs.getInt("sexoUsu"));
+                usuario.setSenhaUsu(rs.getString("senhaUsu"));
+                usuarios.add(usuario);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null,
+                    ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return (ArrayList<Usuario>) usuarios;
+    }
+
+    public List<Usuario> readForDesc(String nome, String tipo) {
+        /*
+        Completa Cresc.
+        Completa Decresc.
+        Cidade
+        Estado
+        Telefone
+        
+        stmt = con.prepareStatement("SELECT * FROM tbUsuario order by nomeUsu");
+                stmt.setString(1, "%" + nome + "%");
             rs = stmt.executeQuery();
             while (rs.next()) {
                 Usuario usuario = new Usuario();
@@ -203,7 +238,53 @@ public class UsuarioDAO {
                 usuario.setSexoUsu(rs.getInt("sexoUsu"));
                 usuario.setSenhaUsu(rs.getString("SenhaUsu"));
                 usuarios.add(usuario);
+         */
+
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        ArrayList<Usuario> usuarios = new ArrayList<>();
+        try {
+            if (tipo.equals("Completa Cresc.")) {
+                stmt = con.prepareStatement("SELECT * FROM tbUsuario order by nomeUsu ASC");
+                rs = stmt.executeQuery();
+                while (rs.next()) {
+                    Usuario usuario = new Usuario();
+                    usuario.setIdUsu(rs.getInt("idUsu"));
+                    usuario.setNomeUsu(rs.getString("nomeUsu"));
+                    usuario.setCepUsu(rs.getString("cepUsu"));
+                    usuario.setLogUsu(rs.getString("logUsu"));
+                    usuario.setNumUsu(rs.getInt("numUsu"));
+                    usuario.setBairroUsu(rs.getString("bairroUsu"));
+                    usuario.setCidadeUsu(rs.getString("cidadeUsu"));
+                    usuario.setEstadoUsu(rs.getString("estadoUsu"));
+                    usuario.setEmailUsu(rs.getString("emailUsu"));
+                    usuario.setTelUsu(rs.getString("telUsu"));
+                    usuario.setSexoUsu(rs.getInt("sexoUsu"));
+                    usuario.setSenhaUsu(rs.getString("SenhaUsu"));
+                    usuarios.add(usuario);
+                }
+            } else if (tipo.equals("Completa Decresc.")) {
+                stmt = con.prepareStatement("SELECT * FROM tbUsuario order by nomeUsu Desc");
+                rs = stmt.executeQuery();
+                
+                while (rs.next()) {
+                    Usuario usuario = new Usuario();
+                    usuario.setIdUsu(rs.getInt("idUsu"));
+                    usuario.setNomeUsu(rs.getString("nomeUsu"));
+                    usuario.setCepUsu(rs.getString("cepUsu"));
+                    usuario.setLogUsu(rs.getString("logUsu"));
+                    usuario.setNumUsu(rs.getInt("numUsu"));
+                    usuario.setBairroUsu(rs.getString("bairroUsu"));
+                    usuario.setCidadeUsu(rs.getString("cidadeUsu"));
+                    usuario.setEstadoUsu(rs.getString("estadoUsu"));
+                    usuario.setEmailUsu(rs.getString("emailUsu"));
+                    usuario.setTelUsu(rs.getString("telUsu"));
+                    usuario.setSexoUsu(rs.getInt("sexoUsu"));
+                    usuario.setSenhaUsu(rs.getString("SenhaUsu"));
+                    usuarios.add(usuario);
+                }
             }
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage()
             );

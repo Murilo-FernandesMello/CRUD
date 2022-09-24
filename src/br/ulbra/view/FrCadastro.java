@@ -7,8 +7,7 @@ package br.ulbra.view;
 
 import br.ulbra.entity.Usuario;
 import br.ulbra.dao.UsuarioDAO;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -17,7 +16,6 @@ import java.net.URLConnection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static javax.management.Query.gt;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -36,7 +34,6 @@ public class FrCadastro extends javax.swing.JFrame {
         ControlarBtn(1);
         EdIdCad1.setEnabled(false);
         readJTable();
-        BtBuscarCEP.setEnabled(true);
 
     }
 
@@ -80,7 +77,6 @@ public class FrCadastro extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        BtBuscarCEP = new javax.swing.JButton();
         EdSenha1 = new javax.swing.JPasswordField();
         EdSenha2 = new javax.swing.JPasswordField();
         EdTel = new javax.swing.JTextField();
@@ -100,6 +96,8 @@ public class FrCadastro extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         EdEstadoCad = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
+        cbFiltro = new javax.swing.JComboBox<>();
+        jLabel25 = new javax.swing.JLabel();
 
         jLabel2.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -119,15 +117,15 @@ public class FrCadastro extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("CADASTRO DE USUÁRIOS");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, -1, -1));
 
         jLabel9.setText("jLabel9");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(221, 450, -1, 0));
 
         jLabel11.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Pesquisar");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 54, -1, -1));
+        jLabel11.setText("Filtro");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
         EdPesquisar.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         EdPesquisar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 51), 1, true));
@@ -136,7 +134,7 @@ public class FrCadastro extends javax.swing.JFrame {
                 EdPesquisarActionPerformed(evt);
             }
         });
-        jPanel1.add(EdPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(79, 56, 410, 19));
+        jPanel1.add(EdPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 410, 19));
 
         BtPesquisar.setBackground(new java.awt.Color(255, 255, 255));
         BtPesquisar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
@@ -147,7 +145,7 @@ public class FrCadastro extends javax.swing.JFrame {
                 BtPesquisarActionPerformed(evt);
             }
         });
-        jPanel1.add(BtPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 60, 28, -1));
+        jPanel1.add(BtPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 60, 28, -1));
 
         tbUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -164,10 +162,10 @@ public class FrCadastro extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbUsuario);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 86, 600, 76));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 600, 76));
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ulbra/img/bala.png"))); // NOI18N
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, -1));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, -1, -1));
 
         BtNovoCad.setBackground(new java.awt.Color(255, 255, 255));
         BtNovoCad.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
@@ -178,7 +176,7 @@ public class FrCadastro extends javax.swing.JFrame {
                 BtNovoCadActionPerformed(evt);
             }
         });
-        jPanel1.add(BtNovoCad, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 600, -1));
+        jPanel1.add(BtNovoCad, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 600, -1));
 
         PnCad.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -227,6 +225,11 @@ public class FrCadastro extends javax.swing.JFrame {
                 EdCepCadActionPerformed(evt);
             }
         });
+        EdCepCad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                EdCepCadKeyReleased(evt);
+            }
+        });
 
         jLabel15.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
@@ -267,16 +270,6 @@ public class FrCadastro extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Sexo");
-
-        BtBuscarCEP.setBackground(new java.awt.Color(255, 255, 255));
-        BtBuscarCEP.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        BtBuscarCEP.setText("Buscar CEP");
-        BtBuscarCEP.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
-        BtBuscarCEP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtBuscarCEPActionPerformed(evt);
-            }
-        });
 
         EdSenha1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
 
@@ -438,12 +431,9 @@ public class FrCadastro extends javax.swing.JFrame {
                                 .addGap(58, 58, 58)
                                 .addComponent(jLabel8))
                             .addGroup(PnCadLayout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(jLabel21)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(37, 37, 37)
                                 .addGroup(PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(RbMasc, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(EdNumCad, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(RbFem, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(RbAlt, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(PnCadLayout.createSequentialGroup()
@@ -451,7 +441,9 @@ public class FrCadastro extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(EdCepCad, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(BtBuscarCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel21)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(EdNumCad, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PnCadLayout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -483,13 +475,12 @@ public class FrCadastro extends javax.swing.JFrame {
                 .addGroup(PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
                     .addComponent(EdCepCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtBuscarCEP))
+                    .addComponent(jLabel21)
+                    .addComponent(EdNumCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(EdLograCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel21)
-                    .addComponent(EdNumCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel16))
                 .addGap(18, 18, 18)
                 .addGroup(PnCadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
@@ -535,13 +526,26 @@ public class FrCadastro extends javax.swing.JFrame {
                         .addComponent(BtSalvar)
                         .addComponent(BtAlterar)
                         .addComponent(BtExcluir)))
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
 
-        jPanel1.add(PnCad, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 530, 470));
+        jPanel1.add(PnCad, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, 530, 470));
 
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ulbra/img/bala.png"))); // NOI18N
-        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, -1));
+        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, -1, -1));
+
+        cbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Completa Cresc.", "Completa Decresc.", "Cidade", "Estado", "Telefone" }));
+        cbFiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbFiltroActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cbFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
+
+        jLabel25.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel25.setText("Pesquisar");
+        jPanel1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -551,14 +555,11 @@ public class FrCadastro extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void BtBuscarCEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtBuscarCEPActionPerformed
-    }//GEN-LAST:event_BtBuscarCEPActionPerformed
 
     private void BtExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtExcluirActionPerformed
 
@@ -671,8 +672,28 @@ public class FrCadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_tbUsuarioMouseClicked
 
     private void BtPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesquisarActionPerformed
+        
+
         try {
-            readJTableForDesc(EdPesquisar.getText());
+            String filtro = null;
+            if (cbFiltro.getSelectedIndex() == 0) {
+                filtro = "Completo Cresc.";
+            } else if (cbFiltro.getSelectedIndex() == 1) {
+                filtro = "Completa Decresc.";
+            } else if (cbFiltro.getSelectedIndex() == 2) {
+                filtro = "Cidade";
+            }else if(cbFiltro.getSelectedIndex() == 3) {
+                filtro = "Estado";
+            }else{
+                filtro = "Telefone";
+            }
+                
+                UsuarioDAO d = new UsuarioDAO();
+                d.readForDesc(EdPesquisar.getText(), filtro);
+
+            
+
+            readJTableForDesc(EdPesquisar.getText(),filtro);
         } catch (SQLException ex) {
             Logger.getLogger(FrCadastro.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -746,6 +767,17 @@ public class FrCadastro extends javax.swing.JFrame {
         ControlarBtn(1);
     }//GEN-LAST:event_EdCepCadActionPerformed
 
+    private void EdCepCadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EdCepCadKeyReleased
+        EdLograCad.setText("Buscando...");
+        if (EdCepCad.getText().length() == 8) {
+            buscarCep(EdCepCad.getText());
+        }
+    }//GEN-LAST:event_EdCepCadKeyReleased
+
+    private void cbFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFiltroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbFiltroActionPerformed
+
     public void ControlarBtn(int op) {
         switch (op) {
             case 1:
@@ -793,12 +825,12 @@ public class FrCadastro extends javax.swing.JFrame {
         }
     }
 
-    public void readJTableForDesc(String nome) throws SQLException {
+    public void readJTableForDesc(String nome, String tipo) throws SQLException {
         DefaultTableModel modelo
                 = (DefaultTableModel) tbUsuario.getModel();
         modelo.setNumRows(0);
         UsuarioDAO pdao = new UsuarioDAO();
-        for (Usuario p : pdao.readForDesc(nome)) {
+        for (Usuario p : pdao.readForDesc(nome,tipo)) {
             modelo.addRow(new Object[]{
                 p.getIdUsu(),
                 p.getNomeUsu(),
@@ -820,18 +852,18 @@ public class FrCadastro extends javax.swing.JFrame {
         String json;
         try {
             URL url = new URL("http://viacep.com.br/ws/" + cep + "/json");
-            URLConnection urlConnection = url.eopenConnection();
+            URLConnection urlConnection = url.openConnection();
             InputStream is = urlConnection.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             StringBuilder jsonSb = new StringBuilder();
             br.lines().forEach(l -> jsonSb.append(l.trim()));
             json = jsonSb.toString();
-            JOptionPane.showMessageDialog(null, json);
-            json = json.replaceAll( "[{},:]","");
-json = json.replaceAll("\"", "\n");
+            // JOptionPane.showMessageDialog(null, json);
+            json = json.replaceAll("[{},:]", "");
+            json = json.replaceAll("\"", "\n");
             String array[] = new String[30];
             array = json.split("\n");
-            JOptionPane.showMessageDialog(null, array);
+            //JOptionPane.showMessageDialog(null, array);
             String logradouro = array[7];
             String bairro = array[15];
             String cidade = array[19];
@@ -840,11 +872,12 @@ json = json.replaceAll("\"", "\n");
             EdBairroCad.setText(bairro);
             EdCidadeCad.setText(cidade);
             EdEstadoCad.setText(uf);
-            JOptionPane.showMessageDialog(null, logradouro + " " + bairro + " "
-                    + cidade + " " + uf);
+            // JOptionPane.showMessageDialog(null, logradouro + " " + bairro + " "
+            //          + cidade + " " + uf);
         } catch (Exception e) {
-            throw new RuntimeException(e);
-            JOptionPane.showMessageDialog(null, "Erro" + e.getMessage());
+
+            JOptionPane.showMessageDialog(null, "CEP não encontrado, verifique se o CEP é correto\n"
+                    + "caso contrario digite o endereço normalmente ");
         }
     }
 
@@ -891,7 +924,6 @@ json = json.replaceAll("\"", "\n");
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtAlterar;
-    private javax.swing.JButton BtBuscarCEP;
     private javax.swing.JButton BtExcluir;
     private javax.swing.JButton BtNovoCad;
     private javax.swing.JButton BtPesquisar;
@@ -916,6 +948,7 @@ json = json.replaceAll("\"", "\n");
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.JComboBox<String> cbFiltro;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -934,6 +967,7 @@ json = json.replaceAll("\"", "\n");
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
