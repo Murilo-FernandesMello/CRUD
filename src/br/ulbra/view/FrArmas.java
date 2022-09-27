@@ -63,28 +63,10 @@ public class FrArmas extends javax.swing.JFrame {
     }
 
     public void readJTable() throws SQLException {
-        DefaultTableModel modelo = (DefaultTableModel) tbArmas.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) TbArmas.getModel();
         modelo.setNumRows(0);
         ArmaDAO adao = new ArmaDAO();
         for (Armas a : adao.readArm()) {
-            modelo.addRow(new Object[]{
-                a.getIdArm(),
-                a.getNomeArm(),
-                a.getTipoArm(),
-                a.getCalibreArm(),
-                a.getFuncArm(),
-                a.getPrecoArm(),
-                a.getNumArm()
-            });
-        }
-    }
-
-    public void readJTableForDesc(String tipo, String nome) throws SQLException {
-        DefaultTableModel modelo
-                = (DefaultTableModel) tbArmas.getModel();
-        modelo.setNumRows(0);
-        ArmaDAO adao = new ArmaDAO();
-        for (Armas a : adao.readForDesc(tipo,nome)) {
             modelo.addRow(new Object[]{
                 a.getIdArm(),
                 a.getNomeArm(),
@@ -114,7 +96,7 @@ public class FrArmas extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         BtPesquisarArm = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbArmas = new javax.swing.JTable();
+        TbArmas = new javax.swing.JTable();
         BtNovoArm = new javax.swing.JButton();
         PnArm = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
@@ -207,7 +189,7 @@ public class FrArmas extends javax.swing.JFrame {
         });
         jPanel1.add(BtPesquisarArm, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 60, 28, -1));
 
-        tbArmas.setModel(new javax.swing.table.DefaultTableModel(
+        TbArmas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -218,12 +200,12 @@ public class FrArmas extends javax.swing.JFrame {
                 "ID", "Nome", "Tipo", "Calibre", "Função", "Preço", "Numeração"
             }
         ));
-        tbArmas.addMouseListener(new java.awt.event.MouseAdapter() {
+        TbArmas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbArmasMouseClicked(evt);
+                TbArmasMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tbArmas);
+        jScrollPane1.setViewportView(TbArmas);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 86, 469, 91));
 
@@ -441,7 +423,7 @@ public class FrArmas extends javax.swing.JFrame {
 
         jPanel1.add(PnArm, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 217, -1, -1));
 
-        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "Tipo", "Calibre" }));
+        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Completa Cres.", "Completa Decresc.", "Nome", "Tipo", "Calibre" }));
         cbTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbTipoActionPerformed(evt);
@@ -477,19 +459,43 @@ public class FrArmas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_BtPesquisarActionPerformed
 
+    public void readJTableForDesc(String nome, int tipo) throws
+            SQLException {
+        DefaultTableModel modelo = (DefaultTableModel) TbArmas.getModel();
+        modelo.setNumRows(0);
+        ArmaDAO adao = new ArmaDAO();
+        for (Armas a : adao.readForDesc(nome, tipo)) {
+            modelo.addRow(new Object[]{
+                a.getIdArm(),
+                a.getNomeArm(),
+                a.getTipoArm(),
+                a.getCalibreArm(),
+                a.getFuncArm(),
+                a.getPrecoArm(),
+                a.getNumArm()
+            });
+        }
+    }
+
     private void BtPesquisarArmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesquisarArmActionPerformed
+        /* Completa Cres. Completa Decresc. Nome Tipo Calibre*/
+
         try {
-            String tipo = null;
-            if(cbTipo.getSelectedIndex()==0){
-                tipo = "nomeArm";
-            }else if(cbTipo.getSelectedIndex()==1){
-                tipo = "tipoArm";
-            }else{
-                tipo = "calibreArm";
+            int tipo;
+            if (cbTipo.getSelectedIndex() == 0) {
+                tipo = 1;
+            } else if (cbTipo.getSelectedIndex() == 1) {
+                tipo = 2;
+            } else if (cbTipo.getSelectedIndex() == 2) {
+                tipo =3;
+            } else if (cbTipo.getSelectedIndex() == 3) {
+                tipo =4;
+            } else {
+                tipo = 5;
             }
-            readJTableForDesc(tipo, EdPesquisarArm.getText());
+            readJTableForDesc(EdPesquisarArm.getText(), tipo);
         } catch (SQLException ex) {
-            Logger.getLogger(FrArmas.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro:" + ex.getMessage());
         }
     }//GEN-LAST:event_BtPesquisarArmActionPerformed
 
@@ -534,7 +540,7 @@ public class FrArmas extends javax.swing.JFrame {
             a.setTipoArm(EdTipoArm.getText());
             a.setCalibreArm(EdCalibreArm.getText());
             a.setFuncArm(EdFuncArm.getText());
-            a.setPrecoArm(Double.parseDouble(EdPrecoArm.getText()));
+            a.setPrecoArm(EdPrecoArm.getText());
             a.setNumArm(EdNum.getText());
             ar.createArm(a);
             readJTable();
@@ -573,7 +579,7 @@ public class FrArmas extends javax.swing.JFrame {
             a.setTipoArm(EdTipoArm.getText());
             a.setCalibreArm(EdCalibreArm.getText());
             a.setFuncArm(EdFuncArm.getText());
-            a.setPrecoArm(Double.parseDouble(EdPrecoArm.getText()));
+            a.setPrecoArm(EdPrecoArm.getText());
             a.setNumArm(EdNum.getText());
             a.setIdArm(Integer.parseInt(EdIdArm.getText()));
             ar.updateArm(a);
@@ -585,39 +591,39 @@ public class FrArmas extends javax.swing.JFrame {
 
     }//GEN-LAST:event_BtAlterarArmaActionPerformed
 
-    private void tbArmasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbArmasMouseClicked
+    private void TbArmasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbArmasMouseClicked
         ControlarBtn(3);
-        if (tbArmas.getSelectedRow() != -1) {
-            EdIdArm.setText(tbArmas.getValueAt(tbArmas.getSelectedRow(), 0).toString());
-            EdNomeArm.setText(tbArmas.getValueAt(tbArmas.getSelectedRow(), 1).toString());
-            EdTipoArm.setText(tbArmas.getValueAt(tbArmas.getSelectedRow(), 2).toString());
-            EdCalibreArm.setText(tbArmas.getValueAt(tbArmas.getSelectedRow(), 3).toString());
-            EdFuncArm.setText(tbArmas.getValueAt(tbArmas.getSelectedRow(), 4).toString());
-            EdPrecoArm.setText(tbArmas.getValueAt(tbArmas.getSelectedRow(), 5).toString());
-            EdNum.setText(tbArmas.getValueAt(tbArmas.getSelectedRow(), 6).toString());
+        if (TbArmas.getSelectedRow() != -1) {
+            EdIdArm.setText(TbArmas.getValueAt(TbArmas.getSelectedRow(), 0).toString());
+            EdNomeArm.setText(TbArmas.getValueAt(TbArmas.getSelectedRow(), 1).toString());
+            EdTipoArm.setText(TbArmas.getValueAt(TbArmas.getSelectedRow(), 2).toString());
+            EdCalibreArm.setText(TbArmas.getValueAt(TbArmas.getSelectedRow(), 3).toString());
+            EdFuncArm.setText(TbArmas.getValueAt(TbArmas.getSelectedRow(), 4).toString());
+            EdPrecoArm.setText(TbArmas.getValueAt(TbArmas.getSelectedRow(), 5).toString());
+            EdNum.setText(TbArmas.getValueAt(TbArmas.getSelectedRow(), 6).toString());
         }
-    }//GEN-LAST:event_tbArmasMouseClicked
+    }//GEN-LAST:event_TbArmasMouseClicked
 
     private void EdPesquisarArmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EdPesquisarArmKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-/*
+            /*
             try {
                 readJTableForDesc(tipo, EdPesquisarArm.getText());
             } catch (SQLException ex) {
                 Logger.getLogger(FrArmas.class.getName()).log(Level.SEVERE, null, ex);
             }*/
         }
-    
+
     }//GEN-LAST:event_EdPesquisarArmKeyPressed
 
     private void cbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbTipoActionPerformed
 
-/**
- * @param args the command line arguments
- */
-public static void main(String args[]) {
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -628,28 +634,24 @@ public static void main(String args[]) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                
 
-}
+                }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(FrArmas.class
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (InstantiationException ex) {
+        } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(FrArmas.class
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (IllegalAccessException ex) {
+        } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(FrArmas.class
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FrArmas.class
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -658,11 +660,10 @@ public static void main(String args[]) {
             public void run() {
                 try {
                     new FrArmas().setVisible(true);
-                
 
-} catch (SQLException ex) {
+                } catch (SQLException ex) {
                     Logger.getLogger(FrArmas.class
-.getName()).log(Level.SEVERE, null, ex);
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -685,6 +686,7 @@ public static void main(String args[]) {
     private javax.swing.JTextField EdPrecoArm;
     private javax.swing.JTextField EdTipoArm;
     private javax.swing.JPanel PnArm;
+    private javax.swing.JTable TbArmas;
     private javax.swing.JComboBox<String> cbTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
@@ -703,6 +705,5 @@ public static void main(String args[]) {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbArmas;
     // End of variables declaration//GEN-END:variables
 }

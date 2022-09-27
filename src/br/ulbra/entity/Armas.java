@@ -11,7 +11,7 @@ public class Armas {
     private String tipoArm;
     private String calibreArm;
     private String funcArm;
-    private double precoArm;
+    private String precoArm;
     private String numArm;
 
     public Armas() {
@@ -19,7 +19,7 @@ public class Armas {
     }
 
     public Armas(int idArm, String nomeArm, String tipoArm,
-            String calibreaArm, String funcArm, double precoArm, String numArm) {
+            String calibreaArm, String funcArm, String precoArm, String numArm) {
 
         this.idArm = idArm;
         this.nomeArm = nomeArm;
@@ -70,11 +70,11 @@ public class Armas {
         this.funcArm = funcArm;
     }
 
-    public double getPrecoArm() {
+    public String getPrecoArm() {
         return precoArm;
     }
 
-    public void setPrecoArm(double precoArm) {
+    public void setPrecoArm(String precoArm) {
         this.precoArm = precoArm;
     }
 

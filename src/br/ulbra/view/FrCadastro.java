@@ -677,7 +677,7 @@ public class FrCadastro extends javax.swing.JFrame {
         try {
             String filtro = null;
             if (cbFiltro.getSelectedIndex() == 0) {
-                filtro = "Completo Cresc.";
+                filtro = "Completa Cresc.";
             } else if (cbFiltro.getSelectedIndex() == 1) {
                 filtro = "Completa Decresc.";
             } else if (cbFiltro.getSelectedIndex() == 2) {

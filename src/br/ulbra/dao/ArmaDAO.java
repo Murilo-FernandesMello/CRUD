@@ -2,7 +2,7 @@ package br.ulbra.dao;
 
 import br.ulbra.entity.Armas;
 import com.mysql.jdbc.Connection;
-import java.sql.PreparedStatement;
+import com.mysql.jdbc.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -30,14 +30,14 @@ public class ArmaDAO {
 
         try {
 
-            stmt = con.prepareStatement("INSERT INTO tbArmas(nomeArm,tipoArm,calibreArm,FuncArm,precoArm,numArm) "
+            stmt = (PreparedStatement) con.prepareStatement("INSERT INTO tbArmas(nomeArm,tipoArm,calibreArm,FuncArm,precoArm,numArm) "
                     + "VALUES (?,?,?,?,?,?)");
 
             stmt.setString(1, a.getNomeArm());
             stmt.setString(2, a.getTipoArm());
             stmt.setString(3, a.getCalibreArm());
             stmt.setString(4, a.getFuncArm());
-            stmt.setDouble(5, a.getPrecoArm());
+            stmt.setString(5, a.getPrecoArm());
             stmt.setString(6, a.getNumArm());
 
             stmt.executeUpdate();
@@ -60,7 +60,7 @@ public class ArmaDAO {
         PreparedStatement stmt = null;
         try {
 
-            stmt = con.prepareStatement("DELETE FROM tbArmas WHERE idArm =  ?");
+            stmt = (PreparedStatement) con.prepareStatement("DELETE FROM tbArmas WHERE idArm =  ?");
 
             stmt.setInt(1, ar.getIdArm());
 
@@ -82,7 +82,7 @@ public class ArmaDAO {
         PreparedStatement stmt = null;
         try {
 
-            stmt = con.prepareStatement(
+            stmt = (PreparedStatement) con.prepareStatement(
                     "UPDATE tbArmas SET nomeArm = ?, tipoArm = ?, calibreArm =  ?,  FuncArm =  ?, precoArm = ?, numArm = ? WHERE  idArm = ? ");
             stmt.setString(1, arm.getNomeArm());
 
@@ -90,10 +90,9 @@ public class ArmaDAO {
 
             stmt.setString(3, arm.getCalibreArm());
 
-            
             stmt.setString(4, arm.getFuncArm());
 
-            stmt.setDouble(5, arm.getPrecoArm());
+            stmt.setString(5, arm.getPrecoArm());
 
             stmt.setString(6, arm.getNumArm());
 
@@ -125,7 +124,7 @@ public class ArmaDAO {
                 arma.setTipoArm(rs.getString("tipoArm"));
                 arma.setCalibreArm(rs.getString("calibreArm"));
                 arma.setFuncArm(rs.getString("funcArm"));
-                arma.setPrecoArm(rs.getDouble("precoArm"));
+                arma.setPrecoArm(rs.getString("precoArm"));
                 arma.setNumArm(rs.getString("numArm"));
                 armas.add(arma);
             }
@@ -138,34 +137,80 @@ public class ArmaDAO {
         return (ArrayList<Armas>) armas;
     }
 
-    public List<Armas> readForDesc(String tipo, String nome ) {
+    /*
+ public List&lt;Usuario&gt; readForDesc(String nome) {
+PreparedStatement stmt = null;
+ResultSet rs = null;
+ArrayList&lt;Usuario&gt; usuarios = new ArrayList&lt;&gt;();
+try {
+stmt = con.prepareStatement(&quot;SELECT * FROM tbusuario WHERE nomeusu LIKE ?");
+stmt.setString(1, "%"+nome+"%");
+rs = stmt.executeQuery();
+while (rs.next()) {
+Usuario usuario = new Usuario();
+usuario.setIdUsu(rs.getInt(&quot;idusu&quot;));
+usuario.setNomeUsu(rs.getString(&quot;nomeusu&quot;));
+usuario.setEmailUsu(rs.getString(&quot;emailusu&quot;));
+usuario.setSenhaUsu(rs.getString(&quot;senhausu&quot;));
+usuario.setFoneUsu(rs.getString(&quot;foneusu&quot;));
+usuario.setSexoUsu(rs.getInt(&quot;sexousu&quot;));
+usuarios.add(usuario);
+}
+} catch (SQLException ex) {
+JOptionPane.showMessageDialog(null, &quot;Erro:&quot; + ex.getMessage());
+} finally {
+ConnectionFactory.closeConnection(con, stmt, rs);
+}
+return usuarios;
+}
+}   
+    
+     */
+    public List<Armas> readForDesc(String nome, int tipo) {
+        JOptionPane.showMessageDialog(null,"Tipo:"+tipo+" Nome"+nome);
         PreparedStatement stmt = null;
         ResultSet rs = null;
         ArrayList<Armas> armas = new ArrayList<>();
-        String script = " where "+tipo+" LIKE '%"+nome+"%'";
+        String script = null;
         try {
-            stmt = con.prepareStatement("SELECT * FROM tbArmas "+script);
-            
-            
+             JOptionPane.showMessageDialog(null,tipo);
+            if (tipo==1) {
+                script = "SELECT idArm, nomeArm, tipoArm, calibreArm, FuncArm, numArm FROM tbArmas order by nomeArm ASC";
+                JOptionPane.showMessageDialog(null,script);
+            } else if (tipo == 2) {
+                script = "SELECT * FROM tbArmas order by nomeArm DESC";
+
+            } else if (tipo == 3) {
+                script = "SELECT * FROM tbArmas where nomeArm like '%" + nome + "%'";
+
+            } else if (tipo == 4) {
+                script = "SELECT * FROM tbArmas";
+
+            } else if (tipo == 5) {
+                script = "SELECT * FROM tbArmas";
+            }
+
+            stmt = (PreparedStatement) con.prepareStatement(script);
             rs = stmt.executeQuery();
             while (rs.next()) {
                 Armas arma = new Armas();
                 arma.setIdArm(rs.getInt("idArm"));
-                arma.setNomeArm(rs.getString("nomeArm"));
-                arma.setTipoArm(rs.getString("tipoArm"));
-                arma.setCalibreArm(rs.getString("calibreArm"));
-                arma.setFuncArm(rs.getString("FuncArm"));
-                arma.setPrecoArm(rs.getDouble("precoArm"));
-                arma.setNumArm(rs.getString("numArm"));
+                arma.setNomeArm("nomeArm");
+                arma.setTipoArm("tipoArm");
+                arma.setCalibreArm("calibreArm");
+                arma.setFuncArm("FuncArm");
+                arma.setPrecoArm("precoArm");
+                arma.setNumArm("numArm");
                 armas.add(arma);
             }
+            return armas;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage()
             );
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
-        return armas;
-    }
+        return null;
 
+    }
 }
