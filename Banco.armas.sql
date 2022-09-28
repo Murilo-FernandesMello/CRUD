@@ -49,5 +49,34 @@ insert into tbArmas(nomeArm,tipoArm,calibreArm,FuncArm,precoArm,numArm)
 values("M4A1","Fuzil","566mm","Automático","10000","BA8965410M");
 
 select * from tbArmas;
-use Banco.armas;
-select * from tbArmas;
+SELECT idArm, nomeArm, tipoArm, calibreArm, FuncArm, numArm FROM tbArmas order by nomeArm ASC;
+select * from tbUsuario where nomeUsu Like "%J%";
+
+alter table tbUsuario
+add cepUsu varchar (11) after nomeUsu;
+
+alter table tbUsuario
+add logUsu varchar (255) after cepUsu,
+add bairroUsu varchar (255) after logUsu,
+add cidadeUsu varchar (255) after bairroUsu,
+add estadoUsu varchar (255) after cidadeUsu;
+
+alter table tbUsuario
+add numUsu int (4) after logUsu;
+
+use bdAulaPOO2;
+
+insert into tbUsuario (nomeUsu,cepUsu,logUsu,numUsu,bairroUsu,cidadeUsu,estadoUsu,emailUsu,telUsu,sexoUsu,senhaUsu)
+values ("Teste","123456","João Rodrigues",123,"Centro","Sapucaia do Sul","RS","t@gmail.com","51986126462",1,"123");
+
+select * from tbUsuario;
+
+describe tbUsuario;
+SELECT * FROM tbUsuario order by nomeUsu ASC;
+
+describe tbArmas;
+
+alter table tbArmas 
+modify column precoArm varchar(255); 
+
+SELECT idarm, calibrearm, precoarm, numarm FROM tbarmas;

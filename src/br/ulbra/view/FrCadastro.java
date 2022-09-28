@@ -162,7 +162,7 @@ public class FrCadastro extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbUsuario);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 600, 76));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 600, 76));
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ulbra/img/bala.png"))); // NOI18N
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, -1, -1));
@@ -176,7 +176,7 @@ public class FrCadastro extends javax.swing.JFrame {
                 BtNovoCadActionPerformed(evt);
             }
         });
-        jPanel1.add(BtNovoCad, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 600, -1));
+        jPanel1.add(BtNovoCad, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 600, -1));
 
         PnCad.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -529,7 +529,7 @@ public class FrCadastro extends javax.swing.JFrame {
                 .addContainerGap(99, Short.MAX_VALUE))
         );
 
-        jPanel1.add(PnCad, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, 530, 470));
+        jPanel1.add(PnCad, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 530, 470));
 
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ulbra/img/bala.png"))); // NOI18N
         jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, -1, -1));
@@ -555,7 +555,7 @@ public class FrCadastro extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();

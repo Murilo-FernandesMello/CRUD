@@ -705,7 +705,7 @@
                 <StringItem index="0" value="Completa Cres."/>
                 <StringItem index="1" value="Completa Decresc."/>
                 <StringItem index="2" value="Nome"/>
-                <StringItem index="3" value="Tipo"/>
+                <StringItem index="3" value="Funcionamento"/>
                 <StringItem index="4" value="Calibre"/>
               </StringArray>
             </Property>

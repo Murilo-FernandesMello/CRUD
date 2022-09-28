@@ -227,41 +227,63 @@ public class UsuarioDAO {
                     usuarios.add(usuario);
                 }
             } else if (tipo.equals("Cidade")) {
-                stmt = con.prepareStatement("SELECT * FROM tbUsuario");
+                stmt = con.prepareStatement("SELECT idUsu,nomeUsu,bairroUsu,cidadeUsu,estadoUsu,emailUsu FROM tbUsuario");
                 rs = stmt.executeQuery();
 
                 while (rs.next()) {
                     Usuario usuario = new Usuario();
                     usuario.setIdUsu(rs.getInt("idUsu"));
                     usuario.setNomeUsu(rs.getString("nomeUsu"));
+                    usuario.setCepUsu("");
+                    usuario.setLogUsu("");
+                    usuario.setNumUsu(0);
                     usuario.setBairroUsu(rs.getString("bairroUsu"));
                     usuario.setCidadeUsu(rs.getString("cidadeUsu"));
                     usuario.setEstadoUsu(rs.getString("estadoUsu"));
                     usuario.setEmailUsu(rs.getString("emailUsu"));
+                    usuario.setTelUsu("");
+                    usuario.setSexoUsu(0);
+                    usuario.setSenhaUsu("");
                     usuarios.add(usuario);
                 }
             }else if(tipo.equals("Estado")) {
-                stmt = con.prepareStatement("SELECT * FROM tbUsuario");
+                stmt = con.prepareStatement("SELECT idUsu,nomeUsu,cidadeUsu,estadoUsu,telUsu FROM tbUsuario");
                 rs = stmt.executeQuery();
 
                 while (rs.next()) {
                     Usuario usuario = new Usuario();
                     usuario.setIdUsu(rs.getInt("idUsu"));
                     usuario.setNomeUsu(rs.getString("nomeUsu"));
+                    usuario.setCepUsu("");
+                    usuario.setLogUsu("");
+                    usuario.setNumUsu(0);
+                    usuario.setBairroUsu("");
                     usuario.setCidadeUsu(rs.getString("cidadeUsu"));
                     usuario.setEstadoUsu(rs.getString("estadoUsu"));
+                    usuario.setEmailUsu("");
                     usuario.setTelUsu(rs.getString("telUsu"));
+                    usuario.setSexoUsu(0);
+                    usuario.setSenhaUsu("");
                     usuarios.add(usuario);
                 }
             }else if(tipo.equals("Telefone")) {
-                stmt = con.prepareStatement("SELECT * FROM tbUsuario");
+                stmt = con.prepareStatement("SELECT idUsu,nomeUsu,telUsu FROM tbUsuario");
                 rs = stmt.executeQuery();
 
                 while (rs.next()) {
                     Usuario usuario = new Usuario();
-                    usuario.setIdUsu(rs.getInt("idUsu"));
+                   usuario.setIdUsu(rs.getInt("idUsu"));
                     usuario.setNomeUsu(rs.getString("nomeUsu"));
+                    usuario.setCepUsu("");
+                    usuario.setLogUsu("");
+                    usuario.setNumUsu(0);
+                    usuario.setBairroUsu("");
+                    usuario.setCidadeUsu("");
+                    usuario.setEstadoUsu("");
+                    usuario.setEmailUsu("");
                     usuario.setTelUsu(rs.getString("telUsu"));
+                    usuario.setSexoUsu(0);
+                    usuario.setSenhaUsu("");
                     usuarios.add(usuario);
                 }
             }

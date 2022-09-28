@@ -1,8 +1,8 @@
 package br.ulbra.dao;
 
 import br.ulbra.entity.Armas;
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class ArmaDAO {
 
         try {
 
-            stmt = (PreparedStatement) con.prepareStatement("INSERT INTO tbArmas(nomeArm,tipoArm,calibreArm,FuncArm,precoArm,numArm) "
+            stmt = con.prepareStatement("INSERT INTO tbArmas(nomeArm,tipoArm,calibreArm,FuncArm,precoArm,numArm) "
                     + "VALUES (?,?,?,?,?,?)");
 
             stmt.setString(1, a.getNomeArm());
@@ -137,80 +137,126 @@ public class ArmaDAO {
         return (ArrayList<Armas>) armas;
     }
 
-    /*
- public List&lt;Usuario&gt; readForDesc(String nome) {
-PreparedStatement stmt = null;
-ResultSet rs = null;
-ArrayList&lt;Usuario&gt; usuarios = new ArrayList&lt;&gt;();
-try {
-stmt = con.prepareStatement(&quot;SELECT * FROM tbusuario WHERE nomeusu LIKE ?");
-stmt.setString(1, "%"+nome+"%");
-rs = stmt.executeQuery();
-while (rs.next()) {
-Usuario usuario = new Usuario();
-usuario.setIdUsu(rs.getInt(&quot;idusu&quot;));
-usuario.setNomeUsu(rs.getString(&quot;nomeusu&quot;));
-usuario.setEmailUsu(rs.getString(&quot;emailusu&quot;));
-usuario.setSenhaUsu(rs.getString(&quot;senhausu&quot;));
-usuario.setFoneUsu(rs.getString(&quot;foneusu&quot;));
-usuario.setSexoUsu(rs.getInt(&quot;sexousu&quot;));
-usuarios.add(usuario);
-}
-} catch (SQLException ex) {
-JOptionPane.showMessageDialog(null, &quot;Erro:&quot; + ex.getMessage());
-} finally {
-ConnectionFactory.closeConnection(con, stmt, rs);
-}
-return usuarios;
-}
-}   
-    
-     */
-    public List<Armas> readForDesc(String nome, int tipo) {
-        JOptionPane.showMessageDialog(null,"Tipo:"+tipo+" Nome"+nome);
+    public List<Armas> ListarCD(String nome, int tipo) {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         ArrayList<Armas> armas = new ArrayList<>();
-        String script = null;
         try {
-             JOptionPane.showMessageDialog(null,tipo);
-            if (tipo==1) {
-                script = "SELECT idArm, nomeArm, tipoArm, calibreArm, FuncArm, numArm FROM tbArmas order by nomeArm ASC";
-                JOptionPane.showMessageDialog(null,script);
-            } else if (tipo == 2) {
-                script = "SELECT * FROM tbArmas order by nomeArm DESC";
-
-            } else if (tipo == 3) {
-                script = "SELECT * FROM tbArmas where nomeArm like '%" + nome + "%'";
-
-            } else if (tipo == 4) {
-                script = "SELECT * FROM tbArmas";
-
-            } else if (tipo == 5) {
-                script = "SELECT * FROM tbArmas";
+            if (tipo == 1) {
+                stmt = con.prepareStatement("SELECT * FROM tbarmas order by nomeArm");
+            } else {
+                stmt = con.prepareStatement("SELECT * FROM tbarmas order by nomeArm DESC");
             }
-
-            stmt = (PreparedStatement) con.prepareStatement(script);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                Armas arma = new Armas();
-                arma.setIdArm(rs.getInt("idArm"));
-                arma.setNomeArm("nomeArm");
-                arma.setTipoArm("tipoArm");
-                arma.setCalibreArm("calibreArm");
-                arma.setFuncArm("FuncArm");
-                arma.setPrecoArm("precoArm");
-                arma.setNumArm("numArm");
-                armas.add(arma);
+                Armas a = new Armas();
+                a.setIdArm(rs.getInt("idarm"));
+                a.setNomeArm(rs.getString("nomeArm"));
+                a.setTipoArm(rs.getString("tipoArm"));
+                a.setCalibreArm(rs.getString("calibreArm"));
+                a.setFuncArm(rs.getString("FuncArm"));
+                a.setPrecoArm(rs.getString("precoArm"));
+                a.setNumArm(rs.getString("numArm"));
+                armas.add(a);
+
             }
-            return armas;
+
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage()
+            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage() + " EStou aqui"
             );
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
-        return null;
+        return armas;
+    }
+
+    public List<Armas> ListarNome(String nome, int tipo) throws SQLException {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        ArrayList<Armas> armas = new ArrayList<>();
+        try {
+
+            stmt = con.prepareStatement("SELECT idArm, nomearm, precoarm, numarm FROM tbarmas WHERE nomearm LIKE ?");
+            stmt.setString(1, "%" + nome + "%");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Armas a = new Armas();
+                a.setIdArm(rs.getInt("idArm"));
+                a.setNomeArm(rs.getString("nomeArm"));
+                a.setTipoArm("");
+                a.setCalibreArm("");
+                a.setFuncArm("");
+                a.setPrecoArm(rs.getString("precoArm"));
+                a.setNumArm(rs.getString("numArm"));
+                armas.add(a);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage());
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return armas;
+
+    }
+
+    public List<Armas> ListarCalibre(String calibre, int tipo) throws SQLException {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        ArrayList<Armas> armas = new ArrayList<>();
+        try {
+
+            stmt = con.prepareStatement("SELECT idarm, calibrearm, precoarm, numarm FROM tbarmas WHERE calibrearm LIKE ?");
+            stmt.setString(1, "%" + calibre + "%");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Armas a = new Armas();
+                a.setIdArm(rs.getInt("idArm"));
+                a.setNomeArm("");
+                a.setTipoArm("");
+                a.setCalibreArm(rs.getString("calibreArm"));
+                a.setFuncArm("");
+                a.setPrecoArm(rs.getString("precoArm"));
+                a.setNumArm(rs.getString("numArm"));
+                armas.add(a);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage());
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return armas;
+
+    }
+
+    public List<Armas> ListarFuncionamento(String funcionamento, int tipo) throws SQLException {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        ArrayList<Armas> armas = new ArrayList<>();
+        try {
+
+            stmt = con.prepareStatement("SELECT idarm, funcarm, precoarm, numarm FROM tbarmas WHERE funcarm LIKE ?");
+            stmt.setString(1, "%" + funcionamento + "%");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Armas a = new Armas();
+                 a.setIdArm(rs.getInt("idArm"));
+                a.setNomeArm("");
+                a.setTipoArm("");
+                a.setCalibreArm("");
+                a.setFuncArm(rs.getString("FuncArm"));
+                a.setPrecoArm(rs.getString("precoArm"));
+                a.setNumArm(rs.getString("numArm"));
+                armas.add(a);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage());
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return armas;
 
     }
 }

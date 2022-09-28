@@ -423,7 +423,7 @@ public class FrArmas extends javax.swing.JFrame {
 
         jPanel1.add(PnArm, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 217, -1, -1));
 
-        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Completa Cres.", "Completa Decresc.", "Nome", "Tipo", "Calibre" }));
+        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Completa Cres.", "Completa Decresc.", "Nome", "Funcionamento", "Calibre" }));
         cbTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbTipoActionPerformed(evt);
@@ -459,12 +459,29 @@ public class FrArmas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_BtPesquisarActionPerformed
 
-    public void readJTableForDesc(String nome, int tipo) throws
+//    public void readJTableForDesc(String nome) throws
+//            SQLException {
+//        DefaultTableModel modelo = (DefaultTableModel) TbArmas.getModel();
+//        modelo.setNumRows(0);
+//        ArmaDAO adao = new ArmaDAO();
+//        for (Armas a : adao.readForDesc(nome)) {
+//            modelo.addRow(new Object[]{
+//                a.getIdArm(),
+//                a.getNomeArm(),
+//                a.getTipoArm(),
+//                a.getCalibreArm(),
+//                a.getFuncArm(),
+//                a.getPrecoArm(),
+//                a.getNumArm()
+//            });
+//        }
+//    }
+    public void listarcD(String nome, int tipo) throws
             SQLException {
         DefaultTableModel modelo = (DefaultTableModel) TbArmas.getModel();
         modelo.setNumRows(0);
         ArmaDAO adao = new ArmaDAO();
-        for (Armas a : adao.readForDesc(nome, tipo)) {
+        for (Armas a : adao.ListarCD(nome, tipo)) {
             modelo.addRow(new Object[]{
                 a.getIdArm(),
                 a.getNomeArm(),
@@ -477,23 +494,77 @@ public class FrArmas extends javax.swing.JFrame {
         }
     }
 
+    public void listarNome(String nome, int tipo) throws
+            SQLException {
+        DefaultTableModel modelo = (DefaultTableModel) TbArmas.getModel();
+        modelo.setNumRows(0);
+        ArmaDAO adao = new ArmaDAO();
+        for (Armas a : adao.ListarNome(nome, tipo)) {
+            modelo.addRow(new Object[]{
+                a.getIdArm(),
+                a.getNomeArm(),
+                a.getTipoArm(),
+                a.getCalibreArm(),
+                a.getFuncArm(),
+                a.getPrecoArm(),
+                a.getNumArm()
+            });
+        }
+    }
+
+    public void listarCalibre(String calibre, int tipo) throws
+            SQLException {
+        DefaultTableModel modelo = (DefaultTableModel) TbArmas.getModel();
+        modelo.setNumRows(0);
+        ArmaDAO adao = new ArmaDAO();
+        for (Armas a : adao.ListarCalibre(calibre, tipo)) {
+            modelo.addRow(new Object[]{
+                a.getIdArm(),
+                a.getNomeArm(),
+                a.getTipoArm(),
+                a.getCalibreArm(),
+                a.getFuncArm(),
+                a.getPrecoArm(),
+                a.getNumArm()
+            });
+        }
+    }
+
+    public void listarFuncionamento(String funcionamento, int tipo) throws
+            SQLException {
+        DefaultTableModel modelo = (DefaultTableModel) TbArmas.getModel();
+        modelo.setNumRows(0);
+        ArmaDAO adao = new ArmaDAO();
+        for (Armas a : adao.ListarFuncionamento(funcionamento, tipo)) {
+            modelo.addRow(new Object[]{
+                a.getIdArm(),
+                a.getNomeArm(),
+                a.getTipoArm(),
+                a.getCalibreArm(),
+                a.getFuncArm(),
+                a.getPrecoArm(),
+                a.getNumArm()
+            });
+        }
+    }
     private void BtPesquisarArmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesquisarArmActionPerformed
         /* Completa Cres. Completa Decresc. Nome Tipo Calibre*/
 
         try {
-            int tipo;
+            int tipo = 0;
             if (cbTipo.getSelectedIndex() == 0) {
-                tipo = 1;
+                listarcD(EdPesquisarArm.getText(), 0);
             } else if (cbTipo.getSelectedIndex() == 1) {
-                tipo = 2;
+                listarcD(EdPesquisarArm.getText(), 1);
             } else if (cbTipo.getSelectedIndex() == 2) {
-                tipo =3;
+                listarNome(EdPesquisarArm.getText(), 2);
             } else if (cbTipo.getSelectedIndex() == 3) {
-                tipo =4;
+                listarFuncionamento(EdPesquisarArm.getText(), 3);
             } else {
-                tipo = 5;
+                listarCalibre(EdPesquisarArm.getText(), 4);
+
             }
-            readJTableForDesc(EdPesquisarArm.getText(), tipo);
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro:" + ex.getMessage());
         }
