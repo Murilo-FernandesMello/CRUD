@@ -5,9 +5,16 @@
  */
 package br.ulbra.view;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -48,8 +55,10 @@ public class FrMenu extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuSair = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        rel1 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
 
         jMenu3.setText("File");
         jMenuBar2.add(jMenu3);
@@ -111,21 +120,37 @@ public class FrMenu extends javax.swing.JFrame {
 
         jMenu2.setText("Relatórios");
 
-        jMenuItem4.setText("R1");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        rel1.setText("Rel.Usu");
+        rel1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                rel1ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem4);
+        jMenu2.add(rel1);
 
-        jMenuItem5.setText("R2");
+        jMenuItem3.setText("Rel.End");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem3);
+
+        jMenuItem5.setText("Rel.Arm");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);
             }
         });
         jMenu2.add(jMenuItem5);
+
+        jMenuItem4.setText("Rel.Tipo");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem4);
 
         jMenuBar1.add(jMenu2);
 
@@ -150,18 +175,61 @@ public class FrMenu extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jMenuSairActionPerformed
+    public void showRelUsu() throws SQLException {
+        Connection con = null;
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bdAulaPOO2",
+                    "root", "");
+            JasperPrint print = JasperFillManager.fillReport("C:\\Relatórios\\rel.jasper", null, con);
+            JasperViewer.viewReport(print, false);
+        } catch (SQLException | JRException ex) {
+            Logger.getLogger(FrMenu.class.getName()).log(Level.SEVERE,
+                    null, ex);
+            JOptionPane.showMessageDialog(rootPane, ex);
+        } finally {
+            con.close();
+        }
+    }
+    private void rel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rel1ActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-           }//GEN-LAST:event_jMenuItem4ActionPerformed
+        try {
+            showRelUsu();
+        } catch (SQLException ex) {
+            Logger.getLogger(FrMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+           }//GEN-LAST:event_rel1ActionPerformed
+    public void showRelArm() throws SQLException {
+        Connection con = null;
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bdAulaPOO2",
+                    "root", "");
+            JasperPrint print = JasperFillManager.fillReport("C:\\Relatórios\\arm.jasper", null, con);
+            JasperViewer.viewReport(print, false);
+        } catch (SQLException | JRException ex) {
+            Logger.getLogger(FrMenu.class.getName()).log(Level.SEVERE,
+                    null, ex);
+            JOptionPane.showMessageDialog(rootPane, ex);
+        } finally {
+            con.close();
+        }
+    }
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        try {
+            showRelArm();
+        } catch (SQLException ex) {
+            Logger.getLogger(FrMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
      }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuArmasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuArmasActionPerformed
         try {
             new FrCadastro().setVisible(true);
+
         } catch (SQLException ex) {
-            Logger.getLogger(FrMenu.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FrMenu.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_jMenuArmasActionPerformed
@@ -169,10 +237,57 @@ public class FrMenu extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         try {
             new FrArmas().setVisible(true);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(FrMenu.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    public void showRelEnd() throws SQLException {
+        Connection con = null;
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bdAulaPOO2",
+                    "root", "");
+            JasperPrint print = JasperFillManager.fillReport("C:\\Relatórios\\End.jasper", null, con);
+            JasperViewer.viewReport(print, false);
+        } catch (SQLException | JRException ex) {
+            Logger.getLogger(FrMenu.class.getName()).log(Level.SEVERE,
+                    null, ex);
+            JOptionPane.showMessageDialog(rootPane, ex);
+        } finally {
+            con.close();
+        }
+    }
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        try {
+            showRelEnd();
         } catch (SQLException ex) {
             Logger.getLogger(FrMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+ public void showRelTipo() throws SQLException {
+        Connection con = null;
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bdAulaPOO2",
+                    "root", "");
+            JasperPrint print = JasperFillManager.fillReport("C:\\Relatórios\\arm2.jasper", null, con);
+            JasperViewer.viewReport(print, false);
+        } catch (SQLException | JRException ex) {
+            Logger.getLogger(FrMenu.class.getName()).log(Level.SEVERE,
+                    null, ex);
+            JOptionPane.showMessageDialog(rootPane, ex);
+        } finally {
+            con.close();
+        }
+    }
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        try {
+            showRelTipo();
+        } catch (SQLException ex) {
+            Logger.getLogger(FrMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,16 +303,24 @@ public class FrMenu extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrMenu.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrMenu.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrMenu.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrMenu.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -223,9 +346,11 @@ public class FrMenu extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuSair;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem rel1;
     // End of variables declaration//GEN-END:variables
 }

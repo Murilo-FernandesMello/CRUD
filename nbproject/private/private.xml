@@ -4,10 +4,8 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/s.lucas/Downloads/CRUD/src/br/ulbra/dao/UsuarioDAO.java</file>
-            <file>file:/C:/Users/s.lucas/Downloads/CRUD/src/br/ulbra/view/FrArmas.java</file>
-            <file>file:/C:/Users/s.lucas/Downloads/CRUD/src/br/ulbra/entity/Armas.java</file>
             <file>file:/C:/Users/s.lucas/Downloads/CRUD/src/br/ulbra/view/FrCadastro.java</file>
-            <file>file:/C:/Users/s.lucas/Downloads/CRUD/src/br/ulbra/dao/ArmaDAO.java</file>
+            <file>file:/C:/Users/s.lucas/Downloads/CRUD/src/br/ulbra/view/FrMenu.java</file>
         </group>
     </open-files>
 </project-private>
